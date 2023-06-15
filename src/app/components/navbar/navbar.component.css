@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Geologica', sans-serif;
+    box-sizing: border-box;
+}
+
+nav
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 2%;
+    z-index: 100;
+    min-width: 350px;
+    background-color: rgba(131, 222, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+nav .logo img
+{
+    max-width: 50px;
+}
+
+.navigation
+{
+    display: flex;
+}
+
+.navigation li
+{
+    list-style: none;
+    margin: 0 10px;
+    transform: translateY(0);
+    transition: 0.5s;
+}
+
+.navigation li:hover
+{
+    transform: translateY(-5px);
+}
+
+.navigation li a
+{
+    color: #FF8A98;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    padding: 10px;
+}
+
+.navigation li:hover a
+{
+    color: #FD5C6F;
+    border-bottom: 3px solid #FD5C6F;
+}
+
+.navigation li:active a
+{
+    color: #2ECEFB;
+    border-bottom: 3px solid #2ECEFB;
+}
+
+.acceso
+{
+    position: relative;
+    width: 400px;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.acceso button
+{
+    width: 45%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 0 15px;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.acceso button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+@media (max-width: 900px)
+{
+    nav
+    {
+        padding: 20px 50px;
+        flex-direction: column;
+    }
+
+    .navigation
+    {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 20px 0;
+    }
+
+    .acceso
+    {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px)
+{
+    nav
+    {
+        padding: 20px;
+    }
+
+    .navigation li
+    {
+        margin: 10px 0;
+    }
+}

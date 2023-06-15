@@ -1,0 +1,22 @@
+<body>
+    <div class="registro">
+
+        <!-- SELECCION DE PERFIL -->
+        <h1 *ngIf="vista == 'seleccion'">¿Cómo desea registrarse?</h1>
+        <div *ngIf="vista == 'seleccion'" class="seleccion">
+            <button (click)="elegirVista('formPaciente')">Paciente</button>
+            <button (click)="elegirVista('formEspecialista')">Especialista</button>
+        </div>
+
+        <!-- FORM PACIENTE -->
+        <div *ngIf="vista == 'formPaciente'">
+            <h1>FORM PACIENTE</h1>
+        </div>
+
+        <!-- FORM ESPECIALISTA -->
+        <div class="form" *ngIf="vista == 'formEspecialista'">
+            <h1>Registro Especialista</h1>
+            <app-form-registro-especialista></app-form-registro-especialista>
+        </div>
+    </div>
+</body>

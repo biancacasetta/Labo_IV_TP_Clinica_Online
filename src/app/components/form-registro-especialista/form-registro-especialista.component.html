@@ -1,0 +1,91 @@
+<div class="main">
+    <form [formGroup]="formEspecialista">
+        <section class="datos-personales">
+            <label for="">Nombre<input formControlName="nombre" type="text">
+                <small *ngIf="formEspecialista.controls['nombre'].errors?.['required'] &&
+                formEspecialista.controls['nombre'].touched">
+                    El nombre es requerido
+                </small>
+                <small *ngIf="formEspecialista.controls['nombre'].errors?.['pattern'] &&
+                formEspecialista.controls['nombre'].touched">
+                    El nombre solo puede tener letras
+                </small>
+            </label>
+            
+            <label for="">Apellido<input formControlName="apellido" type="text">
+                <small *ngIf="formEspecialista.controls['apellido'].errors?.['required'] &&
+                formEspecialista.controls['apellido'].touched">
+                    El apellido es requerido
+                </small>
+                <small *ngIf="formEspecialista.controls['apellido'].errors?.['pattern'] &&
+                formEspecialista.controls['apellido'].touched">
+                    El apellido solo puede tener letras
+                </small>
+            </label>
+            <label for="">Edad<input formControlName="edad" type="number" min="18" max="99">
+                <small *ngIf="formEspecialista.controls['edad'].errors?.['required'] &&
+                formEspecialista.controls['edad'].touched">
+                    La edad es requerida
+                </small>
+                <small *ngIf="(formEspecialista.controls['edad'].errors?.['min'] || formEspecialista.controls['edad'].errors?.['max']) &&
+                formEspecialista.controls['edad'].touched">
+                    La edad debe ser entre 18 y 65
+                </small>
+            </label>
+            <label for="">DNI<input formControlName="dni" type="number" max="8">
+                <small *ngIf="formEspecialista.controls['dni'].errors?.['required'] &&
+                formEspecialista.controls['dni'].touched">
+                    El DNI es requerido
+                </small>
+                <small *ngIf="formEspecialista.controls['dni'].errors?.['pattern'] &&
+                formEspecialista.controls['dni'].touched">
+                    El DNI tiene que tener 8 dígitos
+                </small>
+            </label>
+        </section>
+        <hr>
+        <section class="especialidad">
+            <label for="">Especialidad</label>
+            <label  class="radio" for=""><input formControlName="especialidad" id="" type="radio">Ejemplo</label>
+            <button>Agregar especialidad</button>
+            <small *ngIf="formEspecialista.controls['especialidad'].errors?.['required'] &&
+            formEspecialista.controls['especialidad'].touched">
+                La especialidad es requerida
+            </small>
+        </section>
+        <hr>
+        <section class="datos-acceso">
+            <label for="">Correo electrónico<input formControlName="email" type="email">
+                <small *ngIf="formEspecialista.controls['email'].errors?.['required'] &&
+                formEspecialista.controls['email'].touched">
+                    El correo electrónico es requerido
+                </small>
+                <small *ngIf="formEspecialista.controls['email'].errors?.['pattern'] &&
+                formEspecialista.controls['email'].touched">
+                    El correo electrónico tiene que ser válido
+                </small>
+            </label>
+            <label for="">Contraseña<input formControlName="password" type="password">
+                <small *ngIf="formEspecialista.controls['password'].errors?.['required'] &&
+                formEspecialista.controls['password'].touched">
+                    La contraseña es requerida
+                </small>
+                <small *ngIf="formEspecialista.controls['password'].errors?.['pattern'] &&
+                formEspecialista.controls['password'].touched">
+                    La contraseña debe tener 6 o más caracteres
+                </small>
+            </label>
+        </section>
+        <hr>
+        <section class="foto-perfil">
+            <label for="">Foto de perfil<input formControlName="fotoPerfil" type="file">
+                <small *ngIf="formEspecialista.controls['fotoPerfil'].errors?.['required'] &&
+                formEspecialista.controls['fotoPerfil'].touched">
+                    La foto de perfil es requerida
+                </small>
+            </label>
+        </section>
+        <hr>
+        <button>Registrarse</button>
+    </form>
+</div>
