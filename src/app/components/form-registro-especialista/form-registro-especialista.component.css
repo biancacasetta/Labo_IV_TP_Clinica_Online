@@ -55,23 +55,27 @@ form .especialidad label
     width: 40%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
-form .especialidad .radio
+form .especialidad .check
 {
-    justify-self: flex-start;
+    text-transform: capitalize;
+}
+
+form .especialidad .check:last-child
+{
+    margin-bottom: 5vh;
 }
 
 form .especialidad label input
 {
     margin: 0 10px;
-}
+}    
 
-label input
+.main label input[type="text"], input[type="number"], input[type="email"], input[type="password"]
 {
-    margin-top: 10px;
     height: 30px;
     border: 1px solid #FF8A98;
     border-radius: 30px;
@@ -99,6 +103,7 @@ button
     transform: scale(1);
     transition: 0.3s;
     font-family: 'Geologica', sans-serif;
+    font-size: 1.2em;
 }
 
 button:hover
@@ -131,5 +136,66 @@ input::file-selector-button:hover
 small
 {
     color: #FD5C6F;
+}
+
+.popup
+{
+	position: absolute;
+	width: 400px;
+	background-color: rgba(255, 255, 255, 0.9);
+	text-align: center;
+    border-radius: 100px;
+    backdrop-filter: blur(40px);
+    border: 10px outset #83DEFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup form
+{
+    width: 100%;
+}
+
+.popup input[type="text"]
+{
+    width: 60%;
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+}
+
+.popup label
+{
+    width: 50%;
+    margin-top: 1vh;
+}
+
+.popup button, .popup input::file-selector-button
+{
+    width: 50%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 10px 20px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+    font-size: 1.2em;
+}
+
+.popup button:hover, .popup input::file-selector-button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
 }
 

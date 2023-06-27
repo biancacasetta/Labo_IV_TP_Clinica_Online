@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tpslaboratorioiv": {
+      "hosting": {
+        "TPClinicaOnline": [
+          "biancacasetta-tpclinicaonline"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tpslaboratorioiv"
+  }
+}

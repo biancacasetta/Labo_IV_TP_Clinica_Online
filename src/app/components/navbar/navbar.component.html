@@ -2,13 +2,13 @@
     <a routerLink="" class="logo"><img src="../../../assets/dna.png"></a>
     <ul class="navigation">
         <li><a routerLink="bienvenida">Bienvenida</a></li>
-        <li><a routerLink="">Link</a></li>
-        <li><a routerLink="">Link</a></li>
-        <li><a routerLink="">Link</a></li>
-        <li><a routerLink="">Link</a></li>
+        <li><a routerLink="usuarios" *ngIf="auth.usuarioIngresado && usuarioActual.perfil == 'admin'">Usuarios</a></li>
     </ul>
     <div class="acceso">
-        <button routerLink="login"><i class="fa-solid fa-user"></i> Iniciar sesión</button>
-        <button routerLink="registro"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
+        <button routerLink="/login" *ngIf="!auth.usuarioIngresado"><i class="fa-solid fa-user"></i> Iniciar sesión</button>
+        <button routerLink="/registro" *ngIf="!auth.usuarioIngresado"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
+        <button *ngIf="auth.usuarioIngresado"><i class="fa-solid fa-user"></i> Mi perfil</button>
+        <button routerLink="/login" (click)="auth.logout()" *ngIf="auth.usuarioIngresado">
+            <i class="fa-solid fa-user-plus"></i> Cerrar sesión</button>
     </div>
 </nav>

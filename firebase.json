@@ -1,0 +1,10 @@
+{
+  "hosting": [
+    {
+      "site": "biancacasetta-tpclinicaonline",
+      "target": "TPClinicaOnline",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

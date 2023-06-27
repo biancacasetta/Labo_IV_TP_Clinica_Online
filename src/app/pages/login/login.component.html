@@ -1,1 +1,42 @@
-<p>login works!</p>
+<body>
+    <div class="login">
+        <h1>Iniciar sesión</h1>
+        <form [formGroup]="formLogin"  (ngSubmit)="login()">
+            <section class="datos-acceso">
+                <label for="">Correo electrónico<input formControlName="email" type="email">
+                    <small *ngIf="formLogin.controls['email'].errors?.['required'] &&
+                    formLogin.controls['email'].touched">
+                        El correo electrónico es requerido
+                    </small>
+                    <small *ngIf="formLogin.controls['email'].errors?.['pattern'] &&
+                    formLogin.controls['email'].touched">
+                        El correo electrónico tiene que ser válido
+                    </small>
+                </label>
+                <label for="">Contraseña<input formControlName="password" type="password">
+                    <small *ngIf="formLogin.controls['password'].errors?.['required'] &&
+                    formLogin.controls['password'].touched">
+                        La contraseña es requerida
+                    </small>
+                    <small *ngIf="formLogin.controls['password'].errors?.['pattern'] &&
+                    formLogin.controls['password'].touched">
+                        La contraseña debe tener 6 o más caracteres
+                    </small>
+                </label>
+            </section>
+            <hr>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+    <section class="accesos-rapidos">
+        <h3>Accesos rápidos</h3>
+        <div class="botones-accesos-rapidos">
+            <div *ngFor="let usuario of listaUsuarios">
+                <button (click)="insertarAccesoRapido(usuario.email, usuario.password)">
+                    <img src="{{usuario.fotoPerfil}}" alt="Foto de perfil">
+                </button>
+                <h4>{{usuario.perfil}}</h4>
+            </div>
+        </div>
+    </section>
+</body>

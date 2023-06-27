@@ -1,0 +1,82 @@
+<div class="main">
+    <form [formGroup]="formAdmin" (ngSubmit)="registrarAdmin()">
+        <section class="datos-personales">
+            <label for="">Nombre<input formControlName="nombre" type="text">
+                <small *ngIf="formAdmin.controls['nombre'].errors?.['required'] &&
+                formAdmin.controls['nombre'].touched">
+                    El nombre es requerido
+                </small>
+                <small *ngIf="formAdmin.controls['nombre'].errors?.['pattern'] &&
+                formAdmin.controls['nombre'].touched">
+                    El nombre solo puede tener letras
+                </small>
+            </label>
+            
+            <label for="">Apellido<input formControlName="apellido" type="text">
+                <small *ngIf="formAdmin.controls['apellido'].errors?.['required'] &&
+                formAdmin.controls['apellido'].touched">
+                    El apellido es requerido
+                </small>
+                <small *ngIf="formAdmin.controls['apellido'].errors?.['pattern'] &&
+                formAdmin.controls['apellido'].touched">
+                    El apellido solo puede tener letras
+                </small>
+            </label>
+            <label for="">Edad<input formControlName="edad" type="number" min="18" max="99">
+                <small *ngIf="formAdmin.controls['edad'].errors?.['required'] &&
+                formAdmin.controls['edad'].touched">
+                    La edad es requerida
+                </small>
+                <small *ngIf="(formAdmin.controls['edad'].errors?.['min'] || formAdmin.controls['edad'].errors?.['max']) &&
+                formAdmin.controls['edad'].touched">
+                    La edad debe ser entre 18 y 65
+                </small>
+            </label>
+            <label for="">DNI<input formControlName="dni" type="number">
+                <small *ngIf="formAdmin.controls['dni'].errors?.['required'] &&
+                formAdmin.controls['dni'].touched">
+                    El DNI es requerido
+                </small>
+                <small *ngIf="formAdmin.controls['dni'].errors?.['pattern'] &&
+                formAdmin.controls['dni'].touched">
+                    El DNI tiene que tener 8 dígitos
+                </small>
+            </label>
+        </section>
+        <hr>
+        <section class="datos-acceso">
+            <label for="">Correo electrónico<input formControlName="email" type="email">
+                <small *ngIf="formAdmin.controls['email'].errors?.['required'] &&
+                formAdmin.controls['email'].touched">
+                    El correo electrónico es requerido
+                </small>
+                <small *ngIf="formAdmin.controls['email'].errors?.['pattern'] &&
+                formAdmin.controls['email'].touched">
+                    El correo electrónico tiene que ser válido
+                </small>
+            </label>
+            <label for="">Contraseña<input formControlName="password" type="password">
+                <small *ngIf="formAdmin.controls['password'].errors?.['required'] &&
+                formAdmin.controls['password'].touched">
+                    La contraseña es requerida
+                </small>
+                <small *ngIf="formAdmin.controls['password'].errors?.['pattern'] &&
+                formAdmin.controls['password'].touched">
+                    La contraseña debe tener 6 o más caracteres
+                </small>
+            </label>
+        </section>
+        <hr>
+        <section class="foto-perfil">
+            <label for="">Foto de perfil
+                <input formControlName="fotoPerfil" type="file" (change)="generarRutaFoto($event)">
+                <small *ngIf="formAdmin.controls['fotoPerfil'].errors?.['required'] &&
+                formAdmin.controls['fotoPerfil'].touched">
+                    Las dos fotos son requeridas
+                </small>
+            </label>
+        </section>
+        <hr>
+        <button type="submit">Registrarse</button>
+    </form>
+</div>

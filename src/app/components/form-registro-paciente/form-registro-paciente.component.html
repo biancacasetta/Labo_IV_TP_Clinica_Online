@@ -1,0 +1,99 @@
+<div class="main">
+    <form [formGroup]="formPaciente" (ngSubmit)="registrarPaciente()">
+        <section class="datos-personales">
+            <label for="">Nombre<input formControlName="nombre" type="text">
+                <small *ngIf="formPaciente.controls['nombre'].errors?.['required'] &&
+                formPaciente.controls['nombre'].touched">
+                    El nombre es requerido
+                </small>
+                <small *ngIf="formPaciente.controls['nombre'].errors?.['pattern'] &&
+                formPaciente.controls['nombre'].touched">
+                    El nombre solo puede tener letras
+                </small>
+            </label>
+            
+            <label for="">Apellido<input formControlName="apellido" type="text">
+                <small *ngIf="formPaciente.controls['apellido'].errors?.['required'] &&
+                formPaciente.controls['apellido'].touched">
+                    El apellido es requerido
+                </small>
+                <small *ngIf="formPaciente.controls['apellido'].errors?.['pattern'] &&
+                formPaciente.controls['apellido'].touched">
+                    El apellido solo puede tener letras
+                </small>
+            </label>
+            <label for="">Edad<input formControlName="edad" type="number" min="18" max="99">
+                <small *ngIf="formPaciente.controls['edad'].errors?.['required'] &&
+                formPaciente.controls['edad'].touched">
+                    La edad es requerida
+                </small>
+                <small *ngIf="(formPaciente.controls['edad'].errors?.['min'] || formPaciente.controls['edad'].errors?.['max']) &&
+                formPaciente.controls['edad'].touched">
+                    La edad debe ser entre 18 y 65
+                </small>
+            </label>
+            <label for="">DNI<input formControlName="dni" type="number">
+                <small *ngIf="formPaciente.controls['dni'].errors?.['required'] &&
+                formPaciente.controls['dni'].touched">
+                    El DNI es requerido
+                </small>
+                <small *ngIf="formPaciente.controls['dni'].errors?.['pattern'] &&
+                formPaciente.controls['dni'].touched">
+                    El DNI tiene que tener 8 dígitos
+                </small>
+            </label>
+            <label for="" class="obra-social">Obra social
+                <label for="osde">
+                    <input formControlName="obraSocial" type="radio" id="osde" name="obraSocial" value="OSDE" checked>
+                    OSDE
+                </label>
+                <label for="galeno">
+                    <input formControlName="obraSocial" type="radio" id="galeno" name="obraSocial" value="Galeno">
+                    Galeno
+                </label>
+                <label for="swiss-medical">
+                    <input formControlName="obraSocial" type="radio" id="swiss-medical" name="obraSocial" value="Swiss Medical">
+                    Swiss Medical
+                </label>
+            </label>
+        </section>
+        <hr>
+        <section class="datos-acceso">
+            <label for="">Correo electrónico<input formControlName="email" type="email">
+                <small *ngIf="formPaciente.controls['email'].errors?.['required'] &&
+                formPaciente.controls['email'].touched">
+                    El correo electrónico es requerido
+                </small>
+                <small *ngIf="formPaciente.controls['email'].errors?.['pattern'] &&
+                formPaciente.controls['email'].touched">
+                    El correo electrónico tiene que ser válido
+                </small>
+            </label>
+            <label for="">Contraseña<input formControlName="password" type="password">
+                <small *ngIf="formPaciente.controls['password'].errors?.['required'] &&
+                formPaciente.controls['password'].touched">
+                    La contraseña es requerida
+                </small>
+                <small *ngIf="formPaciente.controls['password'].errors?.['pattern'] &&
+                formPaciente.controls['password'].touched">
+                    La contraseña debe tener 6 o más caracteres
+                </small>
+            </label>
+        </section>
+        <hr>
+        <section class="foto-perfil">
+            <label for="">Fotos
+                <input formControlName="foto1" type="file" (change)="generarRutaFoto1($event)">
+                <input formControlName="foto2" type="file" (change)="generarRutaFoto2($event)">
+                <small *ngIf="(formPaciente.controls['foto1'].errors?.['required'] &&
+                formPaciente.controls['foto1'].touched) ||
+                (formPaciente.controls['foto2'].errors?.['required'] &&
+                formPaciente.controls['foto2'].touched)">
+                    Las dos fotos son requeridas
+                </small>
+            </label>
+        </section>
+        <hr>
+        <button type="submit">Registrarse</button>
+    </form>
+</div>

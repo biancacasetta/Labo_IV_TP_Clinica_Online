@@ -1,5 +1,5 @@
 <div class="main">
-    <form [formGroup]="formEspecialista">
+    <form [formGroup]="formEspecialista" (ngSubmit)="registrarEspecialista()">
         <section class="datos-personales">
             <label for="">Nombre<input formControlName="nombre" type="text">
                 <small *ngIf="formEspecialista.controls['nombre'].errors?.['required'] &&
@@ -32,7 +32,7 @@
                     La edad debe ser entre 18 y 65
                 </small>
             </label>
-            <label for="">DNI<input formControlName="dni" type="number" max="8">
+            <label for="">DNI<input formControlName="dni" type="number">
                 <small *ngIf="formEspecialista.controls['dni'].errors?.['required'] &&
                 formEspecialista.controls['dni'].touched">
                     El DNI es requerido
@@ -46,8 +46,10 @@
         <hr>
         <section class="especialidad">
             <label for="">Especialidad</label>
-            <label  class="radio" for=""><input formControlName="especialidad" id="" type="radio">Ejemplo</label>
-            <button>Agregar especialidad</button>
+            <label  class="check" for="" *ngFor="let especialidad of listaEspecialidades">
+                <input formControlName="especialidad" name="especialidad" value="{{especialidad.nombre}}" type="checkbox">
+                {{especialidad.nombre}}</label>
+            <button (click)="popup = true">Agregar especialidad</button>
             <small *ngIf="formEspecialista.controls['especialidad'].errors?.['required'] &&
             formEspecialista.controls['especialidad'].touched">
                 La especialidad es requerida
@@ -78,7 +80,8 @@
         </section>
         <hr>
         <section class="foto-perfil">
-            <label for="">Foto de perfil<input formControlName="fotoPerfil" type="file">
+            <label for="">Foto de perfil
+                <input formControlName="fotoPerfil" type="file" (change)="generarRutaFoto($event)">
                 <small *ngIf="formEspecialista.controls['fotoPerfil'].errors?.['required'] &&
                 formEspecialista.controls['fotoPerfil'].touched">
                     La foto de perfil es requerida
@@ -86,6 +89,28 @@
             </label>
         </section>
         <hr>
-        <button>Registrarse</button>
+        <button type="submit">Registrarse</button>
+    </form>
+</div>
+
+<div class="popup" *ngIf="popup">
+    <h2>Agregar especialidad</h2>
+    <form [formGroup]="formEspecialidad" (ngSubmit)="registrarEspecialidad()">
+        <input type="text" formControlName="nombre" placeholder="Ingrese su especialidad">
+        <small *ngIf="formEspecialidad.controls['nombre'].errors?.['required'] &&
+        formEspecialidad.controls['nombre'].touched">
+            El nombre de la especialidad es requerido
+        </small>
+
+        <label for="">
+            Foto de la especialidad
+            <input formControlName="fotoEspecialidad" type="file" (change)="generarRutaFoto($event)">
+            <small *ngIf="formEspecialidad.controls['fotoEspecialidad'].errors?.['required'] &&
+            formEspecialidad.controls['fotoEspecialidad'].touched">
+                La foto de la especialidad es requerida
+            </small>
+        </label>
+        <button (click)="popup = false">Cancelar</button>
+        <button type="submit">Agregar</button>
     </form>
 </div>

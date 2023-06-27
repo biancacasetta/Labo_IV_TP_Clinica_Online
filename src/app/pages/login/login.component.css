@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+
+body
+{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #c9effd;
+    background-image: url("https://wallpaperaccess.com/full/1282794.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment:local;
+    background-position: center;
+    overflow: auto;
+    margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    flex-direction: column;
+    font-family: 'Geologica', sans-serif;
+}
+
+.login
+{
+    position: relative;
+    min-width: 300px;
+    margin: 5vh 0;
+    margin-top: 10vh;
+    width: 20%;
+    height: 50%;
+    border: 10px outset #83DEFF;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    padding: 5vh;
+    text-align: center;
+}
+
+.login form
+{
+    width: 100%;
+}
+
+.login button
+{
+    width: 40%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 10px 20px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+    font-size: 1.2em;
+}
+
+.login button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+hr
+{
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #FF8A98;
+}
+
+form
+{
+    width:90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+form section
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+
+form label
+{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 1vh 0;
+}
+
+label input
+{
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+}
+
+small
+{
+    color: #FD5C6F;
+}
+
+.accesos-rapidos h3
+{
+    text-align: center;
+}
+
+.accesos-rapidos .botones-accesos-rapidos
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.accesos-rapidos button div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.accesos-rapidos div button
+{
+    width: 100px;
+    height: 100px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 10px 20px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+    font-size: 0.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accesos-rapidos div button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+.accesos-rapidos .botones-accesos-rapidos div button img
+{
+    height: 70px;
+    width: 70px;
+    border-radius: 70px;
+}
+
+.accesos-rapidos .botones-accesos-rapidos div h4
+{
+    text-align: center;
+    text-transform: capitalize;
+}

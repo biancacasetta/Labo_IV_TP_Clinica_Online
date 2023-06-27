@@ -6,8 +6,8 @@
         <h2>Bianca Casetta</h2>
         <h3>Trabajo Práctico 2 - Clínica Online</h3>
         <div class="acceso">
-            <button routerLink="../login"><i class="fa-solid fa-user"></i> Iniciar sesión</button>
-            <button routerLink="../registro"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
+            <button routerLink="/login" *ngIf="!auth.usuarioIngresado"><i class="fa-solid fa-user"></i> Iniciar sesión</button>
+            <button routerLink="/registro" *ngIf="!auth.usuarioIngresado"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
         </div>
     </div>
 </body>

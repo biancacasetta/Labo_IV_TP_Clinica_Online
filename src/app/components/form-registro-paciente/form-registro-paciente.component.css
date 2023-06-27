@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+
+.main
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Geologica', sans-serif;
+}
+
+hr
+{
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #FF8A98;
+}
+
+form
+{
+    width:90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+form section
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+form label
+{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 1vh;
+}
+
+form label label
+{
+    margin: 0;
+}
+
+label input
+{
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+}
+
+.obra-social label
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.obra-social label input[type="radio"]
+{
+    margin: 0;
+    margin-right: 0.5vw;
+    padding: 0;
+}
+
+.foto-perfil input
+{
+    border: none;
+    height: 40px;
+    padding: 10px 0;
+    border-radius: 0;
+}
+
+button
+{
+    width: 45%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 0 15px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+    font-size: 1.2em;
+}
+
+button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+input::file-selector-button
+{
+    width: 45%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 0 15px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+input::file-selector-button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+small
+{
+    color: #FD5C6F;
+}

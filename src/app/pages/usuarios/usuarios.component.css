@@ -20,13 +20,13 @@ body
     font-family: 'Geologica', sans-serif;
 }
 
-.registro
+.usuarios
 {
     position: relative;
     min-width: 300px;
     margin: 5vh 0;
     margin-top: 10vh;
-    width: 50%;
+    width: 80%;
     height: 50%;
     border: 10px outset #83DEFF;
     border-radius: 100px;
@@ -39,54 +39,7 @@ body
     text-align: center;
 }
 
-.registro .seleccion
-{
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.registro .seleccion button
-{
-    width: 15rem;
-    height: 15rem;
-    background-color: #FF8A98;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    margin: 10px 20px;
-    transform: scale(1);
-    transition: 0.3s;
-    font-family: 'Geologica', sans-serif;
-    font-size: 1.5em;
-}
-
-.registro .seleccion button:hover
-{
-    background-color: #FD5C6F;
-    transform: scale(1.1);
-}
-
-.registro .seleccion button img
-{
-    width: 60%;
-}
-
-.registro .form
-{
-    width: 100%;
-}
-
-.form h1
-{
-    margin-top: 0;
-}
-
-.registro button
+.usuarios button
 {
     width: 40%;
     height: 40px;
@@ -95,28 +48,88 @@ body
     border: none;
     cursor: pointer;
     border-radius: 40px;
-    margin: 10px 20px;
+    margin: 15px;
     transform: scale(1);
     transition: 0.3s;
     font-family: 'Geologica', sans-serif;
-    font-size: 1.2em;
 }
 
-.registro button:hover
+.usuarios button:hover
 {
     background-color: #FD5C6F;
     transform: scale(1.1);
 }
 
-.contenedor-spinner
+h1
 {
-    position: absolute;
+    text-transform: capitalize;
+}
+
+
+.usuarios .botones-usuarios
+{
     width: 100%;
-    height: 100%;
-    backdrop-filter: blur(3px);
-    background-color: rgba(0, 0, 0, 0.1);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.usuarios .botones-usuarios button
+{
+    width: 20%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 0 15px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.usuarios .botones-usuarios button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+.usuarios img
+{
+    width: 8vw;
+    border-radius: 10%;
+}
+
+.usuarios table
+{
+    width: 95%;
+    border: 3px solid #FF8A98;
+    border-collapse: collapse;
+}
+
+th, td
+{
+    padding: 1vh 0;
+    border: 3px solid #FF8A98;
+}
+
+.usuarios table tbody button
+{
+    width: 80%;
+    height: 40px;
+    background-color: #36D49B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.usuarios table tbody button:hover
+{
+    background-color: #00B762;
+    transform: scale(1.1);
 }

@@ -4,19 +4,37 @@
         <!-- SELECCION DE PERFIL -->
         <h1 *ngIf="vista == 'seleccion'">¿Cómo desea registrarse?</h1>
         <div *ngIf="vista == 'seleccion'" class="seleccion">
-            <button (click)="elegirVista('formPaciente')">Paciente</button>
-            <button (click)="elegirVista('formEspecialista')">Especialista</button>
+            <button (click)="elegirVista('formPaciente')">
+                <img src="/assets/woman.png" alt="Paciente">
+            </button>
+            <button (click)="elegirVista('formEspecialista')">
+                <img src="/assets/stethoscope.png" alt="Especialista">
+            </button>
+            <button (click)="elegirVista('formAdmin')" *ngIf="auth.usuarioIngresado && usuarioActual?.perfil == 'admin'">
+                <img src="/assets/administrator.png" alt="Administrador">
+            </button>
         </div>
 
         <!-- FORM PACIENTE -->
         <div *ngIf="vista == 'formPaciente'">
-            <h1>FORM PACIENTE</h1>
+            <h1>Registro Paciente</h1>
+            <app-form-registro-paciente></app-form-registro-paciente>
         </div>
 
         <!-- FORM ESPECIALISTA -->
         <div class="form" *ngIf="vista == 'formEspecialista'">
             <h1>Registro Especialista</h1>
-            <app-form-registro-especialista></app-form-registro-especialista>
+            <app-form-registro-especialista (activarSpinner)="activarSpinner()"></app-form-registro-especialista>
         </div>
+
+        <!-- FORM ADMIN -->
+        <div class="form" *ngIf="vista == 'formAdmin'">
+            <h1>Registro Administrador</h1>
+            <app-form-registro-admin (activarSpinner)="activarSpinner()"></app-form-registro-admin>
+        </div>
+
+        <button (click)="elegirVista('seleccion')" *ngIf="vista != 'seleccion'">Cancelar</button>
     </div>
 </body>
+
+
