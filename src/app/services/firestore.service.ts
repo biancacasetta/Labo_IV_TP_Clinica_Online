@@ -28,7 +28,9 @@ export class FirestoreService {
         password: especialista.password,
         fotoPerfil: especialista.fotoPerfil,
         aprobado: especialista.aprobado,
-        perfil: especialista.perfil
+        perfil: especialista.perfil,
+        duracionTurno: especialista.duracionTurno,
+        disponibilidad: especialista.disponibilidad
       })
       .then(()=>{
         console.log("¡Registro de especialista exitoso!");
@@ -86,6 +88,16 @@ export class FirestoreService {
     this.angularFirestore.collection('tp2-especialidades').add(especialidad);
   }
 
+  guardarTurno(turno:any)
+  {
+    this.angularFirestore.collection("tp2-turnos").add(turno);
+  }
+
+  guardarHistoriaClinica(historiaClinica:any)
+  {
+    this.angularFirestore.collection("tp2-historiales-clinicos").add(historiaClinica);
+  }
+
   obtenerUsuarioPorEmail(email:string)
   {
     return new Promise<any>((resolve, reject) => {
@@ -96,6 +108,34 @@ export class FirestoreService {
   actualizarUsuario(usuarioActualizado:any)
   {
     this.angularFirestore.doc<any>(`tp2-usuarios/${usuarioActualizado.id}`).update(usuarioActualizado);
+  }
+
+  actualizarTurno(turnoActualizado:any)
+  {
+    this.angularFirestore.collection('tp2-turnos', ref =>
+    ref.where('id', '==', turnoActualizado.id))
+    .get()
+    .subscribe(snapshot => {
+      if (snapshot.size === 1) {
+        const turnoDoc = snapshot.docs[0];
+
+        turnoDoc.ref.update(turnoActualizado)
+          .then(() => {
+            console.log('Turno actualizado exitosamente');
+          })
+          .catch((error) => {
+            console.error('Error al actualizar el turno:', error);
+          });
+      } else {
+        console.error('No se encontró un único documento que cumpla con los criterios especificados');
+      }
+    });
+  }
+
+  obtenerHistoriasClinicas()
+  {
+    const coleccion = this.angularFirestore.collection<any>('tp2-historiales-clinicos');
+    return coleccion.valueChanges();
   }
   
 }

@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+
+body
+{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #c9effd;
+    background-image: url("https://wallpaperaccess.com/full/1282794.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment:local;
+    background-position: center;
+    overflow: auto;
+    margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    flex-direction: column;
+    font-family: 'Geologica', sans-serif;
+}
+
+.turnos
+{
+    position: relative;
+    min-width: 300px;
+    margin: 5vh 0;
+    margin-top: 10vh;
+    width: 80%;
+    height: 50%;
+    border: 10px outset #83DEFF;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    padding: 5vh;
+    text-align: center;
+}
+
+.turnos input
+{
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+    margin-bottom: 1vh;
+}
+
+.turnos button
+{
+    width: 40%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 15px 0;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.turnos button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+h1
+{
+    text-transform: capitalize;
+}
+
+.turnos .botones-usuarios
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.turnos .botones-usuarios button
+{
+    width: 20%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 0 15px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.turnos .botones-usuarios button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+.turnos img
+{
+    width: 8vw;
+    border-radius: 10%;
+}
+
+.turnos table
+{
+    width: 95%;
+    border: 3px solid #FF8A98;
+    border-collapse: collapse;
+}
+
+th, td
+{
+    padding: 1vh 0;
+    border: 3px solid #FF8A98;
+}
+
+.turnos table tbody button
+{
+    width: 80%;
+    height: 40px;
+    background-color: #36D49B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.turnos table tbody button:hover
+{
+    background-color: #00B762;
+    transform: scale(1.1);
+}
+
+.popup
+{
+	width: 400px;
+	text-align: center;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+	position: absolute;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 10px outset #83DEFF;
+    padding: 3vh;
+    text-align: center;
+}
+
+.popup h1
+{
+    margin-bottom: 0;
+}
+
+.popup form
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.popup form input
+{
+    width: 80%;
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+}
+
+.popup form button
+{
+    width: 20vh;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 10px 20px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup form button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}

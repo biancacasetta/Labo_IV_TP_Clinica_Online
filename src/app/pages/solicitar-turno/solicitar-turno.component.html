@@ -1,0 +1,59 @@
+<body>
+    <h1>SOLICITAR TURNO</h1>
+    <div class="solicitar-turno">
+
+        <!-- SELECCIONAR PACIENTE -->
+        <div class="seleccion-paciente" *ngIf="pagina > -1 && admin?.perfil == 'admin'">
+            <h1>Seleccione el paciente</h1>
+            <button *ngFor="let paciente of listaPacientes" (click)="seleccionarPaciente(paciente)">
+                <img src="{{paciente.fotoPerfil}}" alt="Foto de perfil">
+            </button>
+        </div>
+
+        <!-- SELECCIONAR ESPECIALISTA -->
+        <div class="seleccion-especialista" *ngIf="pagina > 0">
+            <h1>Seleccione al especialista</h1>
+            <button *ngFor="let especialista of listaEspecialistas" (click)="seleccionarEspecialista(especialista)">
+                <img src="{{especialista.fotoPerfil}}" alt="Foto de perfil">
+            </button>
+        </div>
+
+        <!-- SELECCIONAR ESPECIALIDAD -->
+        <div class="seleccion-especialidad" *ngIf="pagina > 1">
+            <h1>Seleccione la especialidad</h1>
+            <div class="botones-especialidad">
+                <div *ngFor="let especialidad of especialistaSeleccionado.especialidades">
+                    <button (click)="seleccionarEspecialidad(especialidad)">
+                        <img [src]="insertarFotoEspecialidad(especialidad)" alt="Foto de especialidad">
+                    </button>
+                    <h3>{{especialidad}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- SELECCIONAR DIA -->
+        <div class="seleccion-dia" *ngIf="pagina > 2">
+            <h1>Seleccione el día</h1>
+            <button *ngFor="let dia of diasDisponibles" (click)="seleccionarDia(dia)">{{dia}}</button>
+        </div>
+
+        <!-- SELECCIONAR HORA -->
+        <div class="seleccion-hora" *ngIf="pagina > 3">
+            <h1>Seleccione la hora</h1>
+            <button *ngFor="let hora of horasDisponibles" (click)="seleccionarHora(hora)">{{hora}}</button>
+            <h3 *ngIf="horasDisponibles.length == 0">No quedan turnos disponibles para esta fecha</h3>
+        </div>
+
+        <div *ngIf="pagina > 4">
+            <h4>Verifique la información de su turno antes de confirmarlo</h4>
+            <h3 *ngIf="admin?.perfil == 'admin'">Paciente: {{paciente.nombre}} {{paciente.apellido}}</h3>
+            <h3>Especialista: {{especialistaSeleccionado?.nombre}} {{especialistaSeleccionado?.apellido}}</h3>
+            <h3>Especialidad: {{especialidadSeleccionada?.nombre}}</h3>
+            <h3>Día: {{diaSeleccionado}}</h3>
+            <h3>Hora: {{horaSeleccionada}}</h3>
+        </div>
+        
+        <button class="confirmar" *ngIf="pagina > 4" (click)="registrarTurno()">Confirmar Turno</button>
+    </div>
+</body>
+

@@ -1,0 +1,102 @@
+<body>
+    <div class="mi-perfil">
+        <h1>Mi perfil</h1>
+        <div class="foto-y-datos">
+            <img [src]="usuarioActual?.fotoPerfil">
+            <img *ngIf="usuarioActual?.perfil == 'paciente'" [src]="usuarioActual?.fotoPerfil2">
+            <div class="datos-personales">
+                <h4>NOMBRE: {{usuarioActual?.nombre}}</h4>
+                <h4>APELLIDO: {{usuarioActual?.apellido}}</h4>
+                <h4>EDAD: {{usuarioActual?.edad}} años</h4>
+                <h4>DNI: {{usuarioActual?.dni}}</h4>
+                <h4>E-MAIL: {{usuarioActual?.email}}</h4>
+                <h4>PERFIL: {{usuarioActual?.perfil}}</h4>
+                <button *ngIf="usuarioActual?.perfil == 'paciente'" (click)="popup = true">Historia clínica</button>
+                <h4 *ngIf="usuarioActual?.perfil == 'especialista'">ESPECIALIDAD(ES):
+                    <ul>
+                        <button *ngFor="let especialidad of usuarioActual?.especialidades" (click)="verTabla(especialidad)">
+                            {{especialidad}}
+                        </button>
+                    </ul>
+                </h4>
+                <h4 *ngIf="usuarioActual?.perfil == 'especialista'">
+                    DURACION DE TURNO: {{usuarioActual?.duracionTurno}} minutos
+                    <form [formGroup]="formDuracion" (ngSubmit)="modificarDuracion()">
+                        <input formControlName="duracion" type="number">
+                        <button type="submit" [disabled]="formDuracion.controls['duracion'].errors">MODIFICAR</button>
+                        <small *ngIf="(formDuracion.controls['duracion'].errors?.['min'] ||
+                            formDuracion.controls['duracion'].errors?.['max']) &&
+                            formDuracion.controls['duracion'].touched">
+                            La duración debe ser entre 10 y 60 minutos
+                        </small>
+                    </form>
+                </h4>
+                
+            </div>
+        </div>
+
+        <h2 *ngIf="usuarioActual?.perfil == 'especialista'">Mis horarios</h2>
+
+        <div class="tabla" *ngFor="let tablaEspecialidad of usuarioActual?.especialidades; let i = index">
+            <h3 *ngIf="usuarioActual?.especialidades[i] == especialidadActual">{{tablaEspecialidad}}</h3>
+            <table *ngIf="usuarioActual?.especialidades[i] == especialidadActual">
+                <thead>
+                    <th></th>
+                    <th *ngFor="let dia of dias">{{dia}}</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let hora of horas">
+                        <th>{{hora}}</th>
+                        <td *ngFor="let dia of dias">
+                          <label>
+                            <input type="checkbox" [value]="hora" [checked]="estaDisponible(especialidadActual, dia, hora)"
+                            (change)="actualizarDisponibilidad(especialidadActual, dia, hora, $event)">
+                          </label>
+                        </td>
+                      </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="popup" *ngIf="popup">
+            <div class="header-historial">
+                <h1>Historia clínica</h1>
+                <div class="botones-pdf">
+                    <button (click)="historial = false; popup = false">Salir</button>
+                    <button (click)="descargarPDF()">Descargar PDF</button>
+                </div>
+            </div >
+            <div>
+                <h2>Especialistas</h2>
+                <button (click)="filtrarEspecialista('', 'todos')">Todos</button>
+                <button (click)="filtrarEspecialista(especialista, 'uno')" *ngFor="let especialista of listaEspecialistas">{{especialista.nombre}} {{especialista.apellido}}</button>
+            </div>
+            <div class="contenedor-pdf" id="pdf">
+                <h4>Historial Clínico</h4>
+                <p>{{fechaActual}}</p>
+                    <img
+                  src="../../../assets/favicon.ico"
+                  style="width: 90px"
+                  alt="logo"
+                />
+                <h1>Historial clínico de: {{usuarioActual?.apellido}}, {{usuarioActual?.nombre}}</h1>
+                <h3 *ngIf="!hayHistorialFiltrado">No hubo turnos con esa especialidad</h3>
+                <div class="contenedor-datos" *ngFor="let historial of listaHistoriales">
+                  <ul>
+                    <li><strong>Fecha:</strong> {{ historial.dia }} {{historial.hora}}</li>
+                    <li><strong>Paciente:</strong> {{ historial.paciente.apellido }}, {{ historial.paciente.nombre }}</li>
+                    <li><strong>Especialista:</strong> {{ historial.especialista.apellido }}</li>
+                    <li><strong>Peso:</strong> {{ historial.peso }}</li>
+                    <li><strong>Temperatura:</strong> {{ historial.temperatura }}</li>
+                    <li><strong>Presión:</strong> {{ historial.presion }}</li>
+                    <li><strong>Altura:</strong> {{ historial.altura }}</li>
+                    <li *ngFor="let campo of historial | filtroCampos">
+                      <strong>{{ campo[0] }}:</strong> {{ campo[1] }}
+                    </li>
+                  </ul>
+                  <hr />
+                </div>
+            </div>
+        </div>
+</body>

@@ -18,6 +18,14 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { FormRegistroAdminComponent } from './components/form-registro-admin/form-registro-admin.component';
+import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
+import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
+import { TurnosComponent } from './pages/turnos/turnos.component';
+import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
+import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { FiltroCamposPipe } from './pipes/filtro-campos.pipe';
+import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,18 +38,25 @@ import { FormRegistroAdminComponent } from './components/form-registro-admin/for
     FormRegistroPacienteComponent,
     SpinnerComponent,
     UsuariosComponent,
-    FormRegistroAdminComponent
+    FormRegistroAdminComponent,
+    MiPerfilComponent,
+    SolicitarTurnoComponent,
+    TurnosComponent,
+    MisTurnosComponent,
+    PacientesComponent,
+    FiltroCamposPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,34 @@
+<body>
+    <div class="pacientes">
+        <div class="fab-button" *ngFor="let paciente of listaPacientes" (click)="verComentario(paciente)">
+            <img [src]="paciente.fotoPerfil" alt="Imagen paciente">
+            <div class="container">
+              <h4><b>{{paciente.nombre}} {{paciente.apellido}}</b></h4>
+            </div>
+          </div>
+    </div>
+    <div class="contenedor-historial" *ngIf="comentario">
+        <div class="header-historial">
+            <h1>Historia clínica</h1>
+            <button (click)="comentario = false;">Salir</button>
+        </div>
+          <div class="contenedor-datos" *ngFor="let historial of historialPorPaciente">
+            <h4>Historial Clínico</h4>
+            <ul>
+              <li><strong>Fecha:</strong> {{ historial.fechaTurno }}</li>
+              <li><strong>Paciente:</strong> {{ historial.paciente.apellido }}, {{ historial.paciente.nombre }}</li>
+              <li><strong>Especialista:</strong> {{ historial.especialista.apellido }}</li>
+              <li><strong>Peso:</strong> {{ historial.peso }}</li>
+              <li><strong>Temperatura:</strong> {{ historial.temperatura }}</li>
+              <li><strong>Presión:</strong> {{ historial.presion }}</li>
+              <li><strong>Altura:</strong> {{ historial.altura }}</li>
+              <li *ngFor="let campo of historial | filtroCampos">
+                <strong>{{ campo[0] }}:</strong> {{ campo[1] }}
+              </li>
+            </ul>
+            <hr />
+          </div>
+    </div>
+</body>
+
+

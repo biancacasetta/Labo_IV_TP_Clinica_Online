@@ -21,6 +21,7 @@ export class FormRegistroEspecialistaComponent {
   archivoFoto:string = "";
   rutaFoto:string = "";
   fotoPerfil:string = "";
+  captcha: string = "";
   
   formEspecialidad:FormGroup;
   popup:boolean = false;
@@ -37,8 +38,11 @@ export class FormRegistroEspecialistaComponent {
       especialidad: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required, Validators.pattern(".{6,}")]],
-      fotoPerfil: ['', [Validators.required]]
+      fotoPerfil: ['', [Validators.required]],
+      captcha: ['', [Validators.required]]
     });
+
+    this.captcha = this.generarCaptcha(6);
 
     this.formEspecialidad = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.pattern(this.soloLetrasEspacios)]],
@@ -72,7 +76,9 @@ export class FormRegistroEspecialistaComponent {
         password: this.formEspecialista.value.password,
         fotoPerfil: this.fotoPerfil,
         aprobado: false,
-        perfil: "especialista"
+        perfil: "especialista",
+        duracionTurno: 30,
+        disponibilidad: []
       };
 
       this.auth.registrarEspecialista(especialista);
@@ -146,5 +152,19 @@ export class FormRegistroEspecialistaComponent {
         });
       });
     })
+  }
+
+  generarCaptcha(num: number)
+  {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1 = ' ';
+    const charactersLength = characters.length;
+    for (let i = 0; i < num; i++) {
+      result1 += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      );
+    }
+    return result1;
   }
 }

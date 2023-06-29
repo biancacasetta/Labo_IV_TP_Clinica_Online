@@ -22,7 +22,7 @@ export class FormRegistroPacienteComponent {
   rutaFoto2:string = "";
   foto1:string = "";
   foto2:string = "";
-
+  captcha:string = "";
 
   constructor(private formBuilder:FormBuilder, private auth: AuthService, private angularFireStorage: AngularFireStorage)
   {
@@ -35,8 +35,11 @@ export class FormRegistroPacienteComponent {
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required, Validators.pattern(".{6,}")]],
       foto1: ['', [Validators.required]],
-      foto2: ['', [Validators.required]]
+      foto2: ['', [Validators.required]],
+      captcha: ['', [Validators.required]]
     });
+
+    this.captcha = this.generarCaptcha(6);
   }
 
   async registrarPaciente()
@@ -104,5 +107,19 @@ export class FormRegistroPacienteComponent {
         });
       });
     })
+  }
+
+  generarCaptcha(num: number)
+  {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1 = ' ';
+    const charactersLength = characters.length;
+    for (let i = 0; i < num; i++) {
+      result1 += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      );
+    }
+    return result1;
   }
 }

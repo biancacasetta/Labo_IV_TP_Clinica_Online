@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+const EXCEL_TYPE =
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: 'app-usuarios',
@@ -9,11 +14,6 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class UsuariosComponent {
 
   listaUsuarios:any;
-  listaPacientes:any[] = [];
-  listaEspecialistas:any[] = [];
-  listaAdmins:any[] = [];
-
-  vistaUsuarios:string = "admins";
 
   constructor(private firestore: FirestoreService) {}
 
@@ -21,36 +21,8 @@ export class UsuariosComponent {
   {
     this.firestore.obtenerColeccion("tp2-usuarios").subscribe((usuarios) => {
       this.listaUsuarios = usuarios;
-      this.filtrarPerfil(this.listaUsuarios);
+      console.log(this.listaUsuarios);
     });
-  }
-
-  filtrarPerfil(lista:any)
-  {
-    this.listaPacientes = [];
-    this.listaEspecialistas = [];
-    this.listaAdmins = [];
-
-    for (let i = 0; i < lista.length; i++)
-    {
-      switch(lista[i].perfil)
-      {
-        case "paciente":
-          this.listaPacientes.push(lista[i]);
-          break;
-        case "especialista":
-          this.listaEspecialistas.push(lista[i]);
-          break;
-        case "admin":
-          this.listaAdmins.push(lista[i]);
-          break;
-      }
-    }
-  }
-
-  cambiarVistaUsuarios(vista:string)
-  {
-    this.vistaUsuarios = vista;
   }
 
   async toggleEspecialistaAprobado(email:string)
@@ -67,6 +39,32 @@ export class UsuariosComponent {
       this.firestore.actualizarUsuario(especialista[0]);
     }, 2000);
     
+  }
+
+  exportarArchivoExcel(json: any[], excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = {
+      Sheets: { data: worksheet },
+      SheetNames: ['data'],
+    };
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+    this.guardarArchivoExcel(excelBuffer, excelFileName);
+  }
+
+  guardarArchivoExcel(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
+
+  descargarExcel()
+  {
+    this.exportarArchivoExcel(this.listaUsuarios, 'Datos usuarios');
   }
 
 }

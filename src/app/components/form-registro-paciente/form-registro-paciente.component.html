@@ -94,6 +94,15 @@
             </label>
         </section>
         <hr>
+        <section>
+            <p class="captcha">{{captcha}}</p>
+            <input formControlName="captcha" class="captcha-input" type="text" placeholder="CAPTCHA"/>
+            <small *ngIf="formPaciente.controls['captcha'].errors?.['required'] &&
+            formPaciente.controls['captcha'].touched">
+                El captcha es requerido
+            </small>
+        </section>
+        <hr>
         <button type="submit">Registrarse</button>
     </form>
 </div>

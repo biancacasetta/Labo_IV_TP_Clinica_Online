@@ -1,0 +1,40 @@
+<body>
+    <div class="turnos">
+
+        <h1>LISTADO DE TURNOS</h1>
+        <input type="text" [(ngModel)]="valorBusqueda" placeholder="Buscar" (input)="filtrarElementos()">
+        <table>
+            <thead>
+                <th>PACIENTE</th>
+                <th>ESPECIALISTA</th>
+                <th>ESPECIALIDAD</th>
+                <th>FECHA</th>
+                <th>HORA</th>
+                <th>ESTADO</th>
+                <th>ACCION</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let turno of listaTurnos">
+                    <td>{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
+                    <td>{{turno.especialista.nombre}} {{turno.especialista.apellido}}</td>
+                    <td>{{turno.especialidad.nombre}}</td>
+                    <td>{{turno.dia}}</td>
+                    <td>{{turno.hora}}</td>
+                    <td>{{turno.estado}}</td>
+                    <td><button *ngIf="turno.estado == 'solicitado'"
+                        (click)="cancelarTurno(turno)">CANCELAR</button></td>
+                </tr>
+            </tbody>
+
+        </table>
+        
+    </div>
+    <div class="popup" *ngIf="popup">
+        <h1>Cancelar turno</h1>
+        <h3>Indique la razón de la cancelación</h3>
+        <form [formGroup]="formCancelacion" (ngSubmit)="actualizarEstadoTurno()">
+            <input formControlName="razon" type="text">
+            <button type="submit">CANCELAR TURNO</button>
+        </form>
+    </div>
+</body>

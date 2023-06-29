@@ -1,10 +1,11 @@
 {
-  "hosting": [
-    {
-      "site": "biancacasetta-tpclinicaonline",
-      "target": "TPClinicaOnline",
-      "source": ".",
-      "frameworksBackend": {}
-    }
-  ]
+  "hosting": {
+    "site": "biancacasetta-tpclinicaonline",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
 }

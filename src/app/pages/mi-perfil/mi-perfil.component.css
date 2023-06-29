@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+
+body
+{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #c9effd;
+    background-image: url("https://wallpaperaccess.com/full/1282794.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    flex-direction: column;
+    font-family: 'Geologica', sans-serif;
+}
+
+.mi-perfil
+{
+    position: relative;
+    min-width: 300px;
+    margin: 10vh 0;
+    width: 40%;
+    height: 50%;
+    border: 10px outset #83DEFF;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    padding: 5vh;
+    text-align: center;
+}
+
+.mi-perfil img
+{
+    width: 200px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+h1
+{
+    margin: 5px 0;
+}
+
+.mi-perfil .foto-y-datos
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.mi-perfil .foto-y-datos .datos-personales
+{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+h4
+{
+    margin: 0.5vh;
+}
+
+.mi-perfil button
+{
+    width: 100%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 10px 20px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.mi-perfil button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+.mi-perfil input[type="number"]
+{
+    width: 30%;
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+    margin-top: 1vh;
+}
+
+h4 form button
+{
+    width: 50%;
+}
+
+.tabla
+{
+    width: 100%;
+}
+
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td
+{
+    border: 3px solid #FF8A98;
+    padding: 1vh;
+}
+
+.popup
+{
+	width: 400px;
+	text-align: center;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+	position: absolute;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 10px outset #83DEFF;
+    padding: 3vh;
+    text-align: center;
+}
+
+.popup h1
+{
+    margin-bottom: 0;
+}
+
+.popup button
+{
+    width: 100%;
+    height: 40px;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 10px 20px;
+    transform: scale(1);
+    transition: 0.3s;
+    font-family: 'Geologica', sans-serif;
+}
+
+.popup button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}

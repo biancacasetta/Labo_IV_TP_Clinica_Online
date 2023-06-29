@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+
+body
+{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #c9effd;
+    background-image: url("https://wallpaperaccess.com/full/1282794.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    overflow: auto;
+    margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    flex-direction: column;
+    font-family: 'Geologica', sans-serif;
+}
+
+.pacientes
+{
+    position: relative;
+    min-width: 300px;
+    margin: 5vh 0;
+    margin-top: 10vh;
+    width: 50%;
+    height: 50%;
+    border: 10px outset #83DEFF;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    padding: 5vh;
+    text-align: center;
+}
+
+.pacientes .fab-button
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.pacientes .fab-button img
+{
+    width: 90%;
+}

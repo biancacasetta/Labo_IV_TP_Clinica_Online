@@ -1,0 +1,201 @@
+<body>
+    <div class="mis-turnos">
+        <div *ngIf="usuarioActual?.perfil == 'paciente'">
+
+            <h1>LISTADO DE TURNOS</h1>
+            <h2>Paciente: {{usuarioActual?.nombre}} {{usuarioActual?.apellido}}</h2>
+            <input type="text" [(ngModel)]="valorBusqueda" placeholder="Buscar" (input)="filtrarElementos()">
+            <table>
+                <thead>
+                    <th>ESPECIALISTA</th>
+                    <th>ESPECIALIDAD</th>
+                    <th>FECHA</th>
+                    <th>HORA</th>
+                    <th>ESTADO</th>
+                    <th>ACCION</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let turno of listaTurnosPaciente">
+                        <td>{{turno.especialista.nombre}} {{turno.especialista.apellido}}</td>
+                        <td>{{turno.especialidad.nombre}}</td>
+                        <td>{{turno.dia}}</td>
+                        <td>{{turno.hora}}</td>
+                        <td><p class="estado">{{turno.estado}}</p></td>
+                        <td>
+                            <button *ngIf="turno.estado == 'aceptado'" (click)="cancelarTurno(turno)">CANCELAR</button>
+                            <button *ngIf="turno.comentario" (click)="verComentario(turno)">VER RESEÑA</button>
+                            <button *ngIf="turno.estado == 'realizado' && turno.comentario" (click)="completarEncuesta()">COMPLETAR ENCUESTA</button>
+                            <button *ngIf="turno.estado == 'realizado'" (click)="calificarAtencion(turno)">CALIFICAR ATENCIÓN</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="usuarioActual?.perfil == 'especialista'">
+
+            <h1>LISTADO DE TURNOS</h1>
+            <h2>Especialista: {{usuarioActual?.nombre}} {{usuarioActual?.apellido}}</h2>
+            <input type="text" [(ngModel)]="valorBusqueda" placeholder="Buscar" (input)="filtrarElementos()">
+            <table>
+                <thead>
+                    <th>PACIENTE</th>
+                    <th>ESPECIALIDAD</th>
+                    <th>FECHA</th>
+                    <th>HORA</th>
+                    <th>ESTADO</th>
+                    <th>ACCION</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let turno of listaTurnosEspecialista">
+                        <td>{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
+                        <td>{{turno.especialidad.nombre}}</td>
+                        <td>{{turno.dia}}</td>
+                        <td>{{turno.hora}}</td>
+                        <td><p class="estado">{{turno.estado}}</p></td>
+                        <td>
+                            <button *ngIf="turno.estado == 'solicitado'" (click)="cancelarTurno(turno)">CANCELAR</button>
+                            <button *ngIf="turno.estado == 'solicitado'" (click)="rechazarTurno(turno)">RECHAZAR</button>
+                            <button *ngIf="turno.estado == 'solicitado'" (click)="aceptarTurno(turno)">ACEPTAR</button>
+                            <button *ngIf="turno.estado == 'aceptado'" (click)="finalizarTurno(turno)">FINALIZAR</button>
+                            <button *ngIf="turno.comentario" (click)="verComentario(turno)">VER RESEÑA</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="popup" *ngIf="popup">
+        <h1 *ngIf="cancelacion">Cancelar turno</h1>
+        <h3 *ngIf="cancelacion">Indique la razón de la cancelación</h3>
+        <form *ngIf="cancelacion" [formGroup]="formCancelacion" (ngSubmit)="actualizarEstadoCancelado()">
+            <input formControlName="razon" type="text">
+            <button type="submit">CANCELAR TURNO</button>
+        </form>
+
+        <h1 *ngIf="comentario">Comentario/Reseña</h1>
+        <h3 *ngIf="comentarioTurno != '' && comentarioTurno != undefined">Comentario: {{comentarioTurno}}</h3>
+        <button *ngIf="comentario" (click)="popup = false; comentario = false; comentarioTurno = ''">ACEPTAR</button>
+
+        <h1 *ngIf="calificacion">Calificar atención</h1>
+        <h3 *ngIf="calificacion">Deje un comentario sobre cómo lo atendió el especialista</h3>
+        <form *ngIf="calificacion" [formGroup]="formAtencion" (ngSubmit)="actualizarComentario()">
+            <input formControlName="razon" type="text">
+            <button type="submit">CALIFICAR ATENCIÓN</button>
+        </form>
+
+        <div *ngIf="encuesta">
+            <h1>Encuesta</h1>
+            <h3>¿Cómo calificaría la limpieza de la clínica?</h3>
+            <div>
+                Mala <input type="range" name=""> Excelente
+            </div>
+            <h3>¿Recomendaría la clínica a sus familiares?</h3>
+            <div>
+                <input type="radio" name="recomendacion">Sí
+                <input type="radio" name="recomendacion">No
+            </div>
+            <h3>¿Qué especialidad querría que incorporemos?</h3>
+            <div>
+                <input type="checkbox" name="">Oncología<br>
+                <input type="checkbox" name="">Neonatología<br>
+                <input type="checkbox" name="">Ginecología
+            </div>
+            <button (click)="popup = false; encuesta = false">ENVIAR</button>
+        </div>
+        
+        <h1 *ngIf="rechazo">Rechazar turno</h1>
+        <h3 *ngIf="rechazo">Indique la razón del rechazo</h3>
+        <form *ngIf="rechazo" [formGroup]="formRechazo" (ngSubmit)="actualizarEstadoRechazado()">
+            <input formControlName="razon" type="text">
+            <button type="submit">RECHAZAR TURNO</button>
+        </form>
+
+        <h1 *ngIf="finalizado">Finalizar turno</h1>
+        <h3 *ngIf="finalizado">Deje un comentario sobre la consulta y el diagnóstico</h3>
+        <form *ngIf="finalizado" [formGroup]="formFinalizado" (ngSubmit)="actualizarEstadoFinalizado()">
+            <input formControlName="razon" type="text">
+            <button type="submit">COMPLETAR HISTORIAL CLINICO</button>
+        </form>
+
+        <div *ngIf="historialClinico" class="historial-clinico">
+            <div class="container contenedor-form">
+              <div class="row d-flex flex-wrap">
+                <!-- INPUT PESO -->
+                <div class="col-sm mb-3">
+                  <label for="peso" class="form-label">Peso</label>
+                  <input
+                    [(ngModel)]="peso"
+                    type="number"
+                    class="form-control"
+                    id="peso"
+                    placeholder="Peso (KG)"
+                  />
+                </div>
+                <!-- INPUT TEMPERATURA -->
+                <div class="col-sm mb-3">
+                  <label for="temperatura" class="form-label">Temperatura</label>
+                  <input
+                    [(ngModel)]="temperatura"
+                    type="text"
+                    class="form-control"
+                    id="temperatura"
+                    placeholder="Temperatura (°C)"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <!-- INPUT PRESION -->
+                <div class="col-sm mb-3">
+                  <label for="presion" class="form-label">Presión</label>
+                  <input
+                    [(ngModel)]="presion"
+                    type="number"
+                    class="form-control"
+                    id="presion"
+                    placeholder="Presión"
+                  />
+                </div>
+                <!-- INPUT ALTURA -->
+                <div class="col-sm mb-3">
+                  <label for="altura" class="form-label">Altura</label>
+                  <input
+                  [(ngModel)]="altura"
+                    type="text"
+                    class="form-control"
+                    id="altura"
+                    placeholder="Altura (Metros)"
+                  />
+                </div>
+              </div>
+              <!-- PREGUNTAS -->
+              <hr />
+              <div class="contenedor-inputs-dinamicos" *ngFor="let campo of camposDinamicos; let i = index;">
+                <div class="campos-dinamicos">
+                  <label for="key{{i}}">Campo</label>
+                  <input type="text" class="form-control" id="key{{i}}" [(ngModel)]="campo.key" placeholder="Campo" />
+                  <label for="value{{i}}">Valor</label>
+                  <input type="text" class="form-control" id="value{{i}}" [(ngModel)]="campo.value" placeholder="Valor" />
+                  <button type="button" (click)="quitarCampoDinamico(i)"><span>Borrar campo</span><i></i></button>
+                </div>
+                <hr />
+              </div>
+              <div class="contenedor-boton">
+                <button type="button" (click)="agregarCamposDinamicos()" *ngIf="camposDinamicos.length < 3"><span>Añadir campo</span><i></i></button>
+              </div>
+              <hr />
+              <div class="contenedor-error">
+                <small
+                    *ngIf="error">
+                    *Altura, peso, presion y temperatura son campos obligatorios
+                </small>
+              </div>
+              <div class="contenedor-boton">
+                <button type="button" (click)="crearHistorial()"><span>Terminar historial</span><i></i></button>
+                <button type="button" (click)="popup = false"><span>Cancelar</span><i></i></button>
+              </div>
+            </div>
+          </div>
+    </div>
+</body>

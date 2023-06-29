@@ -90,6 +90,27 @@ form .especialidad label input
     border-radius: 0;
 }
 
+.captcha {
+    font-size: 2rem;
+    text-align: center;
+    color: blue;
+    background: #000;
+    padding: 0.6rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-shadow: 1px 1px 1px #fff;
+  }
+
+form section .captcha-input
+{
+    width: 30%;
+    height: 30px;
+    border: 1px solid #FF8A98;
+    border-radius: 30px;
+    padding-left: 1vw;
+}
+
 button
 {
     width: 45%;

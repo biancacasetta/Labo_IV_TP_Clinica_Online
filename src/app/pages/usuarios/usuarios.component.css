@@ -39,6 +39,34 @@ body
     text-align: center;
 }
 
+.usuarios .contenedor-fab-buttons
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.usuarios .fab-button
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #FF8A98;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1vw;
+}
+
+.usuarios .fab-button img
+{
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+}
+
 .usuarios button
 {
     width: 40%;
@@ -64,7 +92,6 @@ h1
 {
     text-transform: capitalize;
 }
-
 
 .usuarios .botones-usuarios
 {
@@ -95,12 +122,6 @@ h1
     transform: scale(1.1);
 }
 
-.usuarios img
-{
-    width: 8vw;
-    border-radius: 10%;
-}
-
 .usuarios table
 {
     width: 95%;
@@ -114,9 +135,14 @@ th, td
     border: 3px solid #FF8A98;
 }
 
-.usuarios table tbody button
+.usuarios .fab-button h3
 {
-    width: 80%;
+    margin: 0;
+}
+
+.usuarios .fab-button button
+{
+    width: 60%;
     height: 40px;
     background-color: #36D49B;
     color: white;
@@ -128,7 +154,7 @@ th, td
     font-family: 'Geologica', sans-serif;
 }
 
-.usuarios table tbody button:hover
+.usuarios .fab-button button:hover
 {
     background-color: #00B762;
     transform: scale(1.1);

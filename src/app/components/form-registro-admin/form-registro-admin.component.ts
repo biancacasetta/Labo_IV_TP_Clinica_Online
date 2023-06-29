@@ -19,6 +19,7 @@ export class FormRegistroAdminComponent {
    archivoFoto:string = "";
    rutaFoto:string = "";
    foto:string = "";
+   captcha:string = "";
  
    constructor(private formBuilder:FormBuilder, private auth: AuthService, private angularFireStorage: AngularFireStorage)
    {
@@ -29,34 +30,37 @@ export class FormRegistroAdminComponent {
        dni: ['', [Validators.required, Validators.pattern(this.solo8digitos)]],
        email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
        password: ['', [Validators.required, Validators.pattern(".{6,}")]],
-       fotoPerfil: ['', [Validators.required]]
+       fotoPerfil: ['', [Validators.required]],
+       captcha: ['', [Validators.required]]
      });
+
+     this.captcha = this.generarCaptcha(6);
    }
  
    async registrarAdmin()
    {
      if(this.formAdmin.valid)
      {
-       await this.subirFoto();
- 
-       const admin = {
-         nombre: this.formAdmin.value.nombre,
-         apellido: this.formAdmin.value.apellido,
-         edad: this.formAdmin.value.edad,
-         dni: this.formAdmin.value.dni,
-         email: this.formAdmin.value.email,
-         password: this.formAdmin.value.password,
-         fotoPerfil: this.foto,
-         perfil: "admin",
-       };
- 
-       this.auth.registrarAdmin(admin);
-       this.formAdmin.reset();
-     }
-     else
-     {
-       console.log("formulario inválido");
-     }
+        await this.subirFoto();
+  
+        const admin = {
+          nombre: this.formAdmin.value.nombre,
+          apellido: this.formAdmin.value.apellido,
+          edad: this.formAdmin.value.edad,
+          dni: this.formAdmin.value.dni,
+          email: this.formAdmin.value.email,
+          password: this.formAdmin.value.password,
+          fotoPerfil: this.foto,
+          perfil: "admin",
+        };
+  
+        this.auth.registrarAdmin(admin);
+        this.formAdmin.reset();
+      }
+      else
+      {
+        console.log("formulario inválido");
+      }
    }
  
    generarRutaFoto($event: any)
@@ -77,5 +81,19 @@ export class FormRegistroAdminComponent {
        });
      });
    }
+
+   generarCaptcha(num: number)
+  {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1 = ' ';
+    const charactersLength = characters.length;
+    for (let i = 0; i < num; i++) {
+      result1 += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      );
+    }
+    return result1;
+  }
 
 }

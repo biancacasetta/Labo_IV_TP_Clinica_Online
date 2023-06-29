@@ -1,66 +1,19 @@
 <body>
     <div class="usuarios">
 
+        <button (click)="descargarExcel()">DESCARGAR EXCEL</button>
         <button routerLink="/registro">REGISTRAR NUEVO USUARIO</button>
-
-        <div class="botones-usuarios">
-            <button (click)="cambiarVistaUsuarios('admins')">ADMINS</button>
-            <button (click)="cambiarVistaUsuarios('especialistas')">ESPECIALISTAS</button>
-            <button (click)="cambiarVistaUsuarios('pacientes')">PACIENTES</button>
+        
+        <div class="contenedor-fab-buttons">
+            <div class="fab-button" *ngFor="let usuario of listaUsuarios">
+                <img src="{{usuario.fotoPerfil}}" alt="Foto de perfil">
+                <h3>{{usuario.nombre}} {{usuario.apellido}}</h3>
+                <button *ngIf="usuario.perfil == 'especialista'" (click)="toggleEspecialistaAprobado(usuario.email)">
+                    {{ usuario.aprobado ? 'DESHABILITAR' : 'HABILITAR' }}
+                </button>
+            </div>
         </div>
-        <h1>{{vistaUsuarios}}</h1>
-        <table>
-            <thead>
-                <th>FOTO DE PERFIL</th>
-                <th>NOMBRE</th>
-                <th>APELLIDO</th>
-                <th>EDAD</th>
-                <th>DNI</th>
-                <th *ngIf="vistaUsuarios == 'pacientes'">OBRA SOCIAL</th>
-                <th>E-MAIL</th>
-                <th *ngIf="vistaUsuarios == 'especialistas'">ESTADO</th>
-            </thead>
-            <tbody *ngIf="vistaUsuarios == 'admins'">
-                <!-- ADMINS -->
-                <tr *ngFor="let admin of listaAdmins">
-                    <td><img src="{{admin.fotoPerfil}}" alt="Foto de perfil"></td>
-                    <td>{{admin.nombre}}</td>
-                    <td>{{admin.apellido}}</td>
-                    <td>{{admin.edad}}</td>
-                    <td>{{admin.dni}}</td>
-                    <td>{{admin.email}}</td>
-                </tr>
-            </tbody>
-
-            <tbody *ngIf="vistaUsuarios == 'especialistas'">
-                <!-- ESPECIALISTAS -->
-                <tr *ngFor="let especialista of listaEspecialistas">
-                    <td><img src="{{especialista.fotoPerfil}}" alt="Foto de perfil"></td>
-                    <td>{{especialista.nombre}}</td>
-                    <td>{{especialista.apellido}}</td>
-                    <td>{{especialista.edad}}</td>
-                    <td>{{especialista.dni}}</td>
-                    <td>{{especialista.email}}</td>
-                    <td><button (click)="toggleEspecialistaAprobado(especialista.email)">
-                        {{especialista.aprobado ? 'DESHABILITAR' : 'HABILITAR'}}
-                    </button></td>
-                </tr>
-            </tbody>
-
-            <tbody *ngIf="vistaUsuarios == 'pacientes'">
-                <!-- PACIENTES -->
-                <tr *ngFor="let paciente of listaPacientes">
-                    <td><img src="{{paciente.fotoPerfil}}" alt="Foto de perfil"></td>
-                    <td>{{paciente.nombre}}</td>
-                    <td>{{paciente.apellido}}</td>
-                    <td>{{paciente.edad}}</td>
-                    <td>{{paciente.dni}}</td>
-                    <td>{{paciente.obraSocial}}</td>
-                    <td>{{paciente.email}}</td>
-                </tr>
-            </tbody>
-
-        </table>
+        
         
     </div>
 </body>
