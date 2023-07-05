@@ -24,13 +24,13 @@
         <!-- FORM ESPECIALISTA -->
         <div class="form" *ngIf="vista == 'formEspecialista'">
             <h1>Registro Especialista</h1>
-            <app-form-registro-especialista (activarSpinner)="activarSpinner()"></app-form-registro-especialista>
+            <app-form-registro-especialista></app-form-registro-especialista>
         </div>
 
         <!-- FORM ADMIN -->
         <div class="form" *ngIf="vista == 'formAdmin'">
             <h1>Registro Administrador</h1>
-            <app-form-registro-admin (activarSpinner)="activarSpinner()"></app-form-registro-admin>
+            <app-form-registro-admin></app-form-registro-admin>
         </div>
 
         <button (click)="elegirVista('seleccion')" *ngIf="vista != 'seleccion'">Cancelar</button>

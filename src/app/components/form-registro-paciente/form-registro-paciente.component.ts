@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-registro-paciente',
@@ -23,8 +24,10 @@ export class FormRegistroPacienteComponent {
   foto1:string = "";
   foto2:string = "";
   captcha:string = "";
+  spinner:boolean = false;
 
-  constructor(private formBuilder:FormBuilder, private auth: AuthService, private angularFireStorage: AngularFireStorage)
+  constructor(private formBuilder:FormBuilder, private auth: AuthService, private angularFireStorage: AngularFireStorage,
+    private router: Router)
   {
     this.formPaciente = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.pattern(this.soloLetrasEspacios)]],
@@ -40,12 +43,15 @@ export class FormRegistroPacienteComponent {
     });
 
     this.captcha = this.generarCaptcha(6);
+
   }
 
   async registrarPaciente()
   {
     if(this.formPaciente.valid)
     {
+      this.spinner = true;
+
       await this.subirFoto();
       await this.subirFoto2();
 
@@ -64,6 +70,8 @@ export class FormRegistroPacienteComponent {
 
       this.auth.registrarPaciente(paciente);
       this.formPaciente.reset();
+      this.spinner = false;
+      this.router.navigateByUrl('/login');
     }
     else
     {

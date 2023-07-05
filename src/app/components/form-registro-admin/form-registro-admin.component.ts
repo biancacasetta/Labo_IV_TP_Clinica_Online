@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-registro-admin',
@@ -20,8 +21,10 @@ export class FormRegistroAdminComponent {
    rutaFoto:string = "";
    foto:string = "";
    captcha:string = "";
+   spinner:boolean = false;
  
-   constructor(private formBuilder:FormBuilder, private auth: AuthService, private angularFireStorage: AngularFireStorage)
+   constructor(private formBuilder:FormBuilder, private auth: AuthService, private angularFireStorage: AngularFireStorage,
+    private router: Router)
    {
      this.formAdmin = this.formBuilder.group({
        nombre: ['', [Validators.required, Validators.pattern(this.soloLetrasEspacios)]],
@@ -41,6 +44,7 @@ export class FormRegistroAdminComponent {
    {
      if(this.formAdmin.valid)
      {
+      this.spinner = true;
         await this.subirFoto();
   
         const admin = {
@@ -56,6 +60,8 @@ export class FormRegistroAdminComponent {
   
         this.auth.registrarAdmin(admin);
         this.formAdmin.reset();
+        this.spinner = false;
+        this.router.navigateByUrl('/login');
       }
       else
       {

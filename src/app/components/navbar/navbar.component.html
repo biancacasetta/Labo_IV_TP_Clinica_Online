@@ -12,7 +12,10 @@
         <button routerLink="/login" *ngIf="!auth.usuarioIngresado"><i class="fa-solid fa-user"></i> Iniciar sesión</button>
         <button routerLink="/registro" *ngIf="!auth.usuarioIngresado"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
         <button routerLink="/mi-perfil" *ngIf="auth.usuarioIngresado"><i class="fa-solid fa-user"></i> Mi perfil</button>
-        <button routerLink="/login" (click)="auth.logout()" *ngIf="auth.usuarioIngresado">
+        <button routerLink="/login" (click)="auth.logout(); cerrarSesion()" *ngIf="auth.usuarioIngresado">
             <i class="fa-solid fa-user-plus"></i> Cerrar sesión</button>
     </div>
 </nav>
+<div class="contenedor-spinner" *ngIf="spinner">
+    <app-spinner></app-spinner>
+</div>

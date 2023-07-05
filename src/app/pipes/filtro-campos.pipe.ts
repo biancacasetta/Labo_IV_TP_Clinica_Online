@@ -12,5 +12,4 @@ export class FiltroCamposPipe implements PipeTransform {
     }
     return [];
   }
-
 }

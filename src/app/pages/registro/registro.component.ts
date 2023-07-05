@@ -12,7 +12,6 @@ import { deslizarIzqADerAnimacion } from '../animaciones';
 export class RegistroComponent {
 
   vista:string = "seleccion";
-  spinner:boolean = false;
   popup:boolean = false;
   usuarioActual:any;
 
@@ -31,15 +30,6 @@ export class RegistroComponent {
   elegirVista(vista:string)
   {
     this.vista = vista;
-  }
-
-  activarSpinner()
-  {
-    this.spinner = true;
-
-    setTimeout(() => {
-      this.spinner = false;
-    }, 3000);
   }
 
 }

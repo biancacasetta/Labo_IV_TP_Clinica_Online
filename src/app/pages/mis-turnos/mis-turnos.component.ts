@@ -14,6 +14,8 @@ export class MisTurnosComponent {
   listaTurnos:any[] = [];
   listaTurnosPaciente:any[] = [];
   listaTurnosEspecialista:any[] = [];
+  listaTurnosPacienteFiltrados:any[] = [];
+  listaTurnosEspecialistaFiltrados:any[] = [];
   popup:boolean = false;
   turnoACancelar:any;
   formCancelacion:FormGroup;
@@ -88,6 +90,9 @@ export class MisTurnosComponent {
         this.listaTurnosEspecialista.push(lista[i]);
       }
     }
+
+    this.listaTurnosEspecialistaFiltrados = [...this.listaTurnosEspecialista];
+    this.listaTurnosPacienteFiltrados = [...this.listaTurnosPacienteFiltrados];
   }
 
   cancelarTurno(turno:any)
@@ -235,18 +240,23 @@ export class MisTurnosComponent {
   }
 
   filtrarElementos() {
+
     if (this.usuarioActual.perfil == "paciente") {
-      this.listaTurnosPaciente = this.listaTurnos.filter(turno =>
+
+      this.listaTurnosPaciente = this.listaTurnosPacienteFiltrados.filter(turno =>
         turno.especialidad.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
         turno.especialista.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
-        turno.especialista.apellido.toLowerCase().includes(this.valorBusqueda.toLowerCase())
+        turno.especialista.apellido.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
+        (turno.historial && this.obtenerHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()))
       );
     }
     else {
-      this.listaTurnosEspecialista = this.listaTurnos.filter(turno =>
-        turno.data.especialidad.name.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
-        turno.data.paciente.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
-        turno.data.paciente.apellido.toLowerCase().includes(this.valorBusqueda.toLowerCase())
+
+      this.listaTurnosEspecialista = this.listaTurnosEspecialistaFiltrados.filter(turno =>
+        turno.especialidad.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
+        turno.paciente.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
+        turno.paciente.apellido.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
+        (turno.historial && this.obtenerHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()))
       );
     }
   }
@@ -267,11 +277,6 @@ export class MisTurnosComponent {
       peso: this.peso,
       temperatura: this.temperatura,
       presion: this.presion,
-      especialista: this.usuarioActual,
-      paciente: this.turnoFinalizado.paciente,
-      especialidad: this.turnoFinalizado.especialidad,
-      dia: this.turnoFinalizado.dia,
-      hora: this.turnoFinalizado.hora,
     };
     if(this.altura != '' && this.peso != '' && this.temperatura != '' && this.presion != '')
     {
@@ -281,6 +286,9 @@ export class MisTurnosComponent {
         historialClinico[campo.key] = campo.value;
       });
 
+      this.turnoFinalizado.historial = historialClinico;
+      this.firestore.actualizarTurno(this.turnoFinalizado);
+
       this.firestore.guardarHistoriaClinica(historialClinico);
       this.popup = false;
     }
@@ -288,6 +296,16 @@ export class MisTurnosComponent {
     {
       this.error = true;
     }
-
   } 
+
+  obtenerHistorialesFiltrados(historial: any, filtro: string)
+  {
+    const result = historial.some((clinical: any) => {
+      return Object.keys(clinical).some(key => {
+        const value = clinical[key];
+        return key.includes(filtro) || (typeof value === 'string' && value.includes(filtro));
+      });
+    });
+    return result;
+  }
 }

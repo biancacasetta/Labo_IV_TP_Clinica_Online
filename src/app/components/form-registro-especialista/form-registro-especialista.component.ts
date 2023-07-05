@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-registro-especialista',
@@ -22,13 +23,14 @@ export class FormRegistroEspecialistaComponent {
   rutaFoto:string = "";
   fotoPerfil:string = "";
   captcha: string = "";
+  spinner:boolean = false;
   
   formEspecialidad:FormGroup;
   popup:boolean = false;
   nuevaEspecialidad:string = "";
 
   constructor(private formBuilder:FormBuilder, private firestore: FirestoreService, private auth: AuthService,
-    private angularFireStorage: AngularFireStorage)
+    private angularFireStorage: AngularFireStorage, private router: Router)
   {
     this.formEspecialista = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.pattern(this.soloLetrasEspacios)]],
@@ -58,12 +60,19 @@ export class FormRegistroEspecialistaComponent {
       this.listaEspecialidades = data;
       console.log(this.listaEspecialidades);
     });
+
+    this.spinner = true;
+
+    setTimeout(() => {
+      this.spinner = false;
+    }, 2000);
   }
 
   async registrarEspecialista()
   {
     if(this.formEspecialista.valid)
     {
+      this.spinner = true;
       await this.subirFoto("fotoPerfil");
 
       const especialista = {
@@ -83,6 +92,8 @@ export class FormRegistroEspecialistaComponent {
 
       this.auth.registrarEspecialista(especialista);
       this.formEspecialista.reset();
+      this.spinner = false;
+      this.router.navigateByUrl('/login');
     }
     else
     {

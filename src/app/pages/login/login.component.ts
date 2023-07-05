@@ -18,6 +18,7 @@ export class LoginComponent {
    soloLetrasEspacios:string = "^[a-zA-Z\s]+$";
    emailPattern:any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    solo8digitos:string = "[0-9]{8}";
+   spinner:boolean = false;
 
    listaUsuarios:any;
    accesosRapidos:any[] = [];
@@ -37,6 +38,7 @@ export class LoginComponent {
      if (this.formLogin.valid)
      {
         let verificacion:string = "";
+        this.spinner = true;
         try
         {
           await this.auth.login(this.formLogin.value.email, this.formLogin.value.password)
@@ -47,18 +49,16 @@ export class LoginComponent {
                 if (verificacion != "verificado")
                 {
                   this.auth.logout();
-                  //this.sweetServ.mensajeError(verificacion, "Iniciar sesión");
                 }
                 else
                 {
-                  //this.sweetServ.mensajeExitoso(verificacion, "Iniciar sesión");
+                  this.spinner = false;
                   this.router.navigate(['/bienvenida']);
                 }       
           });
         });       
         } catch (error) {
         console.log(error);
-        //this.sweetServ.mensajeError("Error al iniciar sesión", "Iniciar sesión");
       }
      }
    }

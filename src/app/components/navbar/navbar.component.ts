@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent {
 
   usuarioActual:any;
+  spinner:boolean = false;
 
   constructor(public auth: AuthService) {
     
@@ -23,5 +24,16 @@ export class NavbarComponent {
       }
     });
   }
+
+  cerrarSesion()
+  {
+    this.spinner = true;
+
+    setTimeout(() => {
+      this.spinner = false;
+    }, 2000);
+  }
+
+
 
 }
