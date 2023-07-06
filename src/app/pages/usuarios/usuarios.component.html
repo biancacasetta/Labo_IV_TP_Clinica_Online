@@ -5,7 +5,7 @@
         <button routerLink="/registro">REGISTRAR NUEVO USUARIO</button>
         
         <div class="contenedor-fab-buttons">
-            <div class="fab-button" *ngFor="let usuario of listaUsuarios">
+            <div class="fab-button" *ngFor="let usuario of listaUsuarios" (click)="descargarExcelPaciente(usuario)">
                 <img src="{{usuario.fotoPerfil}}" alt="Foto de perfil">
                 <h3>{{usuario.nombre}} {{usuario.apellido}}</h3>
                 <button *ngIf="usuario.perfil == 'especialista'" (click)="toggleEspecialistaAprobado(usuario.email)">

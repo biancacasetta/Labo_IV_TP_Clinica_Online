@@ -26,6 +26,14 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { FiltroCamposPipe } from './pipes/filtro-campos.pipe';
 import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
+import { CardHoverDirective } from './directives/card-hover.directive';
+import { LogoHoverDirective } from './directives/logo-hover.directive';
+import { TableHeaderDirective } from './directives/table-header.directive';
+import { TableRowDirective } from './directives/table-row.directive';
+import { MayusculaPipe } from './pipes/mayuscula.pipe';
+import { InglesPipe } from './pipes/ingles.pipe';
+import { PrimeraMayusculaPipe } from './pipes/primera-mayuscula.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +52,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TurnosComponent,
     MisTurnosComponent,
     PacientesComponent,
-    FiltroCamposPipe
+    FiltroCamposPipe,
+    EstadisticasComponent,
+    CardHoverDirective,
+    LogoHoverDirective,
+    TableHeaderDirective,
+    TableRowDirective,
+    MayusculaPipe,
+    InglesPipe,
+    PrimeraMayusculaPipe
   ],
   imports: [
     BrowserModule,
@@ -56,7 +72,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }, DatePipe],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }, DatePipe, InglesPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

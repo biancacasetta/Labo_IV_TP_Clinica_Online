@@ -95,7 +95,7 @@
         </section>
         <hr>
         <section>
-            <p class="captcha">{{captcha}}</p>
+            <p class="captcha" onmousedown = 'return false' onselectstart = 'return false'>{{captcha}}</p>
             <input formControlName="captcha" class="captcha-input" type="text" placeholder="CAPTCHA"/>
             <small *ngIf="formPaciente.controls['captcha'].errors?.['required'] &&
             formPaciente.controls['captcha'].touched">

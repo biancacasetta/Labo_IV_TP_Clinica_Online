@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { addDoc, collection } from '@angular/fire/firestore';
+import { Firestore } from 'firebase/firestore';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +99,24 @@ export class FirestoreService {
   guardarHistoriaClinica(historiaClinica:any)
   {
     this.angularFirestore.collection("tp2-historiales-clinicos").add(historiaClinica);
+  }
+
+  guardarRegistro(usuario:any)
+  {
+    const dia = moment(new Date()).format('DD-MM-YYYY');
+    const hora = moment(new Date()).format('HH:mm:ss');
+
+    const registro =
+    {
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      email: usuario.email,
+      dia: dia,
+      hora: hora,
+      perfil: usuario.perfil
+    };
+    
+    this.angularFirestore.collection("tp2-registros").add(registro);
   }
 
   obtenerUsuarioPorEmail(email:string)

@@ -54,6 +54,7 @@ export class LoginComponent {
                 {
                   this.spinner = false;
                   this.router.navigate(['/bienvenida']);
+                  this.firestore.guardarRegistro(usuario);
                 }       
           });
         });       

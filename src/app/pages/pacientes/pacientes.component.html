@@ -12,19 +12,23 @@
             <h1>Historia clínica</h1>
             <button (click)="comentario = false;">Salir</button>
         </div>
-          <div class="contenedor-datos" *ngFor="let historial of historialPorPaciente">
+          <div class="contenedor-datos" *ngFor="let turno of historialPorPaciente">
             <h4>Historial Clínico</h4>
             <ul>
-              <li><strong>Fecha:</strong> {{ historial.fechaTurno }}</li>
-              <li><strong>Paciente:</strong> {{ historial.paciente.apellido }}, {{ historial.paciente.nombre }}</li>
-              <li><strong>Especialista:</strong> {{ historial.especialista.apellido }}</li>
-              <li><strong>Peso:</strong> {{ historial.peso }}</li>
-              <li><strong>Temperatura:</strong> {{ historial.temperatura }}</li>
-              <li><strong>Presión:</strong> {{ historial.presion }}</li>
-              <li><strong>Altura:</strong> {{ historial.altura }}</li>
-              <li *ngFor="let campo of historial | filtroCampos">
+              <li><strong>Fecha:</strong> {{ turno.dia }}</li>
+              <li><strong>Hora:</strong> {{ turno.hora }}</li>
+              <li><strong>Paciente:</strong> {{ turno.paciente.nombre }} {{ turno.paciente.apellido }}</li>
+              <li><strong>Especialista:</strong> {{ turno.especialista.nombre }} {{ turno.especialista.apellido }}</li>
+              <li><strong>Peso:</strong> {{ turno.historial.peso }}</li>
+              <li><strong>Temperatura:</strong> {{ turno.historial.temperatura }}</li>
+              <li><strong>Presión:</strong> {{ turno.historial.presion }}</li>
+              <li><strong>Altura:</strong> {{ turno.historial.altura }}</li>
+              <li *ngFor="let campo of turno.historial | filtroCampos">
                 <strong>{{ campo[0] }}:</strong> {{ campo[1] }}
               </li>
+              <button *ngIf="!abrirComentario" (click)="abrirComentario = true">VER RESEÑA</button>
+              <li *ngIf="abrirComentario"><strong>Comentario:</strong> {{turno.comentario}}</li>
+              <button *ngIf="abrirComentario" (click)="abrirComentario = false">CERRAR</button>
             </ul>
             <hr />
           </div>

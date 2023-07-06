@@ -9,7 +9,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
-  styleUrls: ['./mi-perfil.component.css']
+  styleUrls: ['./mi-perfil.component.css'],
 })
 export class MiPerfilComponent {
 

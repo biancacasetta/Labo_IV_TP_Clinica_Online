@@ -34,6 +34,41 @@ nav .logo img
     display: flex;
 }
 
+.logo-idiomas
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav button
+{
+    width: 3vw;
+    height: 3vw;
+    background-color: #FF8A98;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 0 15px;
+    transform: scale(1);
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav button:hover
+{
+    background-color: #FD5C6F;
+    transform: scale(1.1);
+}
+
+nav button img
+{
+    width: 60%;
+}
+
 .navigation li
 {
     list-style: none;
@@ -147,3 +182,14 @@ nav .logo img
     justify-content: center;
     align-items: center;
 }
+
+.sliding-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(0);
+    white-space: nowrap;
+    animation-delay: 0.5s;
+    transition: transform 0.5s linear;
+    transform: translate(-50%, -50%);
+  }

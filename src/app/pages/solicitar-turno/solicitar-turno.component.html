@@ -26,7 +26,7 @@
                     <button (click)="seleccionarEspecialidad(especialidad)">
                         <img [src]="insertarFotoEspecialidad(especialidad)" alt="Foto de especialidad">
                     </button>
-                    <h3>{{especialidad}}</h3>
+                    <h3>{{especialidad | primeraMayuscula}}</h3>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <h4>Verifique la información de su turno antes de confirmarlo</h4>
             <h3 *ngIf="admin?.perfil == 'admin'">Paciente: {{paciente.nombre}} {{paciente.apellido}}</h3>
             <h3>Especialista: {{especialistaSeleccionado?.nombre}} {{especialistaSeleccionado?.apellido}}</h3>
-            <h3>Especialidad: {{especialidadSeleccionada?.nombre}}</h3>
+            <h3>Especialidad: {{especialidadSeleccionada?.nombre | primeraMayuscula}}</h3>
             <h3>Día: {{diaSeleccionado}}</h3>
             <h3>Hora: {{horaSeleccionada}}</h3>
         </div>

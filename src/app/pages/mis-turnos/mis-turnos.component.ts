@@ -92,7 +92,8 @@ export class MisTurnosComponent {
     }
 
     this.listaTurnosEspecialistaFiltrados = [...this.listaTurnosEspecialista];
-    this.listaTurnosPacienteFiltrados = [...this.listaTurnosPacienteFiltrados];
+    this.listaTurnosPacienteFiltrados = [...this.listaTurnosPaciente];
+    //console.log()
   }
 
   cancelarTurno(turno:any)
@@ -242,22 +243,22 @@ export class MisTurnosComponent {
   filtrarElementos() {
 
     if (this.usuarioActual.perfil == "paciente") {
-
       this.listaTurnosPaciente = this.listaTurnosPacienteFiltrados.filter(turno =>
         turno.especialidad.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
         turno.especialista.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
         turno.especialista.apellido.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
-        (turno.historial && this.obtenerHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()))
-      );
+        (turno.historial && (this.obtenerKeysHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()) ||
+        this.obtenerValuesHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()))
+      ));
     }
     else {
-
       this.listaTurnosEspecialista = this.listaTurnosEspecialistaFiltrados.filter(turno =>
         turno.especialidad.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
         turno.paciente.nombre.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
         turno.paciente.apellido.toLowerCase().includes(this.valorBusqueda.toLowerCase()) ||
-        (turno.historial && this.obtenerHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()))
-      );
+        (turno.historial && (this.obtenerKeysHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()) ||
+        this.obtenerValuesHistorialesFiltrados(turno.historial, this.valorBusqueda.toLowerCase()))
+      ));
     }
   }
 
@@ -298,14 +299,29 @@ export class MisTurnosComponent {
     }
   } 
 
-  obtenerHistorialesFiltrados(historial: any, filtro: string)
+  obtenerKeysHistorialesFiltrados(historial: any, filtro: string)
   {
-    const result = historial.some((clinical: any) => {
+    const keys = Object.keys(historial);
+    
+    const result = keys.some((clinical: any) => {
       return Object.keys(clinical).some(key => {
-        const value = clinical[key];
+        const value = clinical.toLowerCase();
         return key.includes(filtro) || (typeof value === 'string' && value.includes(filtro));
+      });
+    });    
+    return result;
+  }
+
+  obtenerValuesHistorialesFiltrados(historial: any, filtro: string)
+  {
+      const values = Object.values(historial);
+      const result = values.some((clinical: any) => {
+        return Object.keys(clinical).some(key => {
+          const value = clinical.toLowerCase();
+          return key.includes(filtro) || (typeof value === 'string' && value.includes(filtro));
       });
     });
     return result;
   }
 }
+

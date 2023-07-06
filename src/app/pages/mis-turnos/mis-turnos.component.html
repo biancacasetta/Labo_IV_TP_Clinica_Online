@@ -6,7 +6,7 @@
             <h2>Paciente: {{usuarioActual?.nombre}} {{usuarioActual?.apellido}}</h2>
             <input type="text" [(ngModel)]="valorBusqueda" placeholder="Buscar" (input)="filtrarElementos()">
             <table>
-                <thead>
+                <thead appTableHeader>
                     <th>ESPECIALISTA</th>
                     <th>ESPECIALIDAD</th>
                     <th>FECHA</th>
@@ -15,9 +15,9 @@
                     <th>ACCION</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let turno of listaTurnosPaciente">
+                    <tr appTableRow *ngFor="let turno of listaTurnosPaciente">
                         <td>{{turno.especialista.nombre}} {{turno.especialista.apellido}}</td>
-                        <td>{{turno.especialidad.nombre}}</td>
+                        <td>{{turno.especialidad.nombre | primeraMayuscula}}</td>
                         <td>{{turno.dia}}</td>
                         <td>{{turno.hora}}</td>
                         <td><p class="estado">{{turno.estado}}</p></td>
@@ -38,7 +38,7 @@
             <h2>Especialista: {{usuarioActual?.nombre}} {{usuarioActual?.apellido}}</h2>
             <input type="text" [(ngModel)]="valorBusqueda" placeholder="Buscar" (input)="filtrarElementos()">
             <table>
-                <thead>
+                <thead appTableHeader>
                     <th>PACIENTE</th>
                     <th>ESPECIALIDAD</th>
                     <th>FECHA</th>
@@ -47,9 +47,9 @@
                     <th>ACCION</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let turno of listaTurnosEspecialista">
+                    <tr appTableRow *ngFor="let turno of listaTurnosEspecialista">
                         <td>{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
-                        <td>{{turno.especialidad.nombre}}</td>
+                        <td>{{turno.especialidad.nombre | primeraMayuscula}}</td>
                         <td>{{turno.dia}}</td>
                         <td>{{turno.hora}}</td>
                         <td><p class="estado">{{turno.estado}}</p></td>

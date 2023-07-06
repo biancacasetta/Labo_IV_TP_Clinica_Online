@@ -15,7 +15,7 @@
                 <h4 *ngIf="usuarioActual?.perfil == 'especialista'">ESPECIALIDAD(ES):
                     <ul>
                         <button *ngFor="let especialidad of usuarioActual?.especialidades" (click)="verTabla(especialidad)">
-                            {{especialidad}}
+                            {{especialidad | primeraMayuscula}}
                         </button>
                     </ul>
                 </h4>
@@ -38,19 +38,19 @@
         <h2 *ngIf="usuarioActual?.perfil == 'especialista'">Mis horarios</h2>
 
         <div class="tabla" *ngFor="let tablaEspecialidad of usuarioActual?.especialidades; let i = index">
-            <h3 *ngIf="usuarioActual?.especialidades[i] == especialidadActual">{{tablaEspecialidad}}</h3>
+            <h3 *ngIf="usuarioActual?.especialidades[i] == especialidadActual">{{tablaEspecialidad | primeraMayuscula}}</h3>
             <table *ngIf="usuarioActual?.especialidades[i] == especialidadActual">
-                <thead>
+                <thead appTableHeader>
                     <th></th>
                     <th *ngFor="let dia of dias">{{dia}}</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let hora of horas">
+                    <tr appTableRow *ngFor="let hora of horas">
                         <th>{{hora}}</th>
                         <td *ngFor="let dia of dias">
-                          <label>
+                          <label >
                             <input type="checkbox" [value]="hora" [checked]="estaDisponible(especialidadActual, dia, hora)"
-                            (change)="actualizarDisponibilidad(especialidadActual, dia, hora, $event)">
+                            (change)="actualizarDisponibilidad(especialidadActual, dia, hora, $event)" >
                           </label>
                         </td>
                       </tr>
@@ -81,7 +81,7 @@
                   alt="logo"
                 />
                 <h1>Historial clínico de: {{usuarioActual?.apellido}}, {{usuarioActual?.nombre}}</h1>
-                <h3 *ngIf="!hayHistorialFiltrado">No hubo turnos con esa especialidad</h3>
+                <h3 *ngIf="!hayHistorialFiltrado">No hubo turnos con ese especialista</h3>
                 <div class="contenedor-datos" *ngFor="let historial of listaHistoriales">
                   <ul>
                     <li><strong>Fecha:</strong> {{ historial.dia }} {{historial.hora}}</li>

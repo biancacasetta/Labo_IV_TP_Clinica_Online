@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InglesPipe } from 'src/app/pipes/ingles.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class NavbarComponent {
   usuarioActual:any;
   spinner:boolean = false;
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, public pipeIngles: InglesPipe) {
     
   }
 

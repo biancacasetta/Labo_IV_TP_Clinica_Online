@@ -14,6 +14,8 @@ const EXCEL_EXTENSION = '.xlsx';
 export class UsuariosComponent {
 
   listaUsuarios:any;
+  listaTurnos:any;
+  turnosPaciente:any[] = [];
 
   constructor(private firestore: FirestoreService) {}
 
@@ -22,6 +24,10 @@ export class UsuariosComponent {
     this.firestore.obtenerColeccion("tp2-usuarios").subscribe((usuarios) => {
       this.listaUsuarios = usuarios;
       console.log(this.listaUsuarios);
+    });
+
+    this.firestore.obtenerColeccion("tp2-turnos").subscribe((turnos) => {
+      this.listaTurnos = turnos;
     });
   }
 
@@ -65,6 +71,25 @@ export class UsuariosComponent {
   descargarExcel()
   {
     this.exportarArchivoExcel(this.listaUsuarios, 'Datos usuarios');
+  }
+
+  filtrarTurnosPorPaciente(paciente:any)
+  {
+    this.turnosPaciente = [];
+    for (let i = 0; i < this.listaTurnos.length; i++) {
+      if(paciente.id == this.listaTurnos[i].paciente.id)
+      {
+        this.turnosPaciente.push(this.listaTurnos[i]);
+      } 
+    }
+  }
+
+  descargarExcelPaciente(paciente:any) {
+    if(paciente.perfil == 'paciente')
+    {
+      this.filtrarTurnosPorPaciente(paciente);
+      this.exportarArchivoExcel(this.turnosPaciente, 'Turnos paciente');
+    }
   }
 
 }

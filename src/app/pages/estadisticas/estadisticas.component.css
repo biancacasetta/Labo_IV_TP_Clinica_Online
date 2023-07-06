@@ -19,7 +19,7 @@ body
     font-family: 'Geologica', sans-serif;
 }
 
-.mis-turnos
+.estadisticas
 {
     position: relative;
     min-width: 300px;
@@ -31,80 +31,43 @@ body
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-wrap: wrap;
     backdrop-filter: blur(10px);
     padding: 5vh;
     text-align: center;
 }
 
-.mis-turnos div
+.estadisticas .card
+{
+    background-color: rgba(131, 222, 255, 0.5);
+    margin: 3vh;
+    height: 300px;
+    width: 150px;
+    cursor: pointer;
+    border: 10px outset #83DEFF;
+    border-radius: 50px;
+}
+
+img
+{
+    width: 100px;
+}
+
+table
 {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.mis-turnos div input
-{
-    height: 30px;
-    border: 1px solid #FF8A98;
-    border-radius: 30px;
-    padding-left: 1vw;
-    margin-bottom: 1vh;
-}
-
-.mis-turnos table
-{
-    width: 95%;
-    border: 3px solid #FF8A98;
     border-collapse: collapse;
 }
 
-th, td
+table th, table td
 {
-    padding: 1vh;
     border: 3px solid #FF8A98;
-}
-
-.mis-turnos table tbody button
-{
-    width: 80%;
-    height: 40px;
-    margin: 0.5vh 0;
-    background-color: #36D49B;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 40px;
-    transform: scale(1);
-    transition: 0.3s;
-    font-family: 'Geologica', sans-serif;
-}
-
-.mis-turnos table tbody button:hover
-{
-    background-color: #00B762;
-    transform: scale(1.1);
-}
-
-tbody tr .estado
-{
-    height: 30px;
-    border-radius: 30px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    background-color: #FD5C6F;
-    color: white;
+    padding: 1vh;
 }
 
 .popup
 {
-	width: 400px;
+	min-width: 40%;
 	text-align: center;
     border-radius: 50px;
     backdrop-filter: blur(10px);
@@ -119,34 +82,18 @@ tbody tr .estado
     text-align: center;
 }
 
-.popup h1
+.popup .botonera
 {
-    margin-bottom: 0;
-}
-
-.popup form
-{
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-}
-
-.popup form input
-{
-    width: 80%;
-    height: 30px;
-    border: 1px solid #FF8A98;
-    border-radius: 30px;
-    padding-left: 1vw;
 }
 
 .popup button
 {
     width: 20vh;
     height: 40px;
-    background-color: #ff8a98;
+    background-color: #FF8A98;
     color: white;
     border: none;
     cursor: pointer;
@@ -165,13 +112,4 @@ tbody tr .estado
 {
     background-color: #FD5C6F;
     transform: scale(1.1);
-}
-
-.popup .historial-clinico input
-{
-    height: 30px;
-    border: 1px solid #FF8A98;
-    border-radius: 30px;
-    padding-left: 1vw;
-    margin-bottom: 1vh;
 }

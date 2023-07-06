@@ -14,8 +14,9 @@ export class PacientesComponent {
   usuariosPorEspecialista:any = new Array();
   comentario:boolean = false;
   especialista:any;
-  listaHistoriasCLinicasPorEspecialista:any = new Array();
+  listaTurnosPorEspecialista:any = new Array();
   spinner:boolean = false;
+  abrirComentario:boolean = false;
   pacientesCount: { [paciente: string]: { count: number; fechas: string[] } } = {};
 
   constructor(private auth: AuthService, private firestore: FirestoreService) {}
@@ -25,24 +26,23 @@ export class PacientesComponent {
     this.auth.obtenerUsuarioLogueado().subscribe((usuario)=>{
       this.especialista = usuario;
       console.log(usuario);
-      this.listaHistoriasCLinicasPorEspecialista = [];
-      this.firestore.obtenerHistoriasClinicas().subscribe((historiasClinicas)=>{
-        for (let i = 0; i < historiasClinicas.length; i++) {
-          if(historiasClinicas[i].especialista.id == this.especialista.id)
+      this.listaTurnosPorEspecialista = [];
+      this.firestore.obtenerColeccion("tp2-turnos").subscribe((turnos)=>{
+        for (let i = 0; i < turnos.length; i++) {
+          if(turnos[i].especialista.id == this.especialista.id && turnos[i].estado == "realizado")
           {
-            this.listaHistoriasCLinicasPorEspecialista.push(historiasClinicas[i]);
+            this.listaTurnosPorEspecialista.push(turnos[i]);
           }
         }
-        console.log(this.listaHistoriasCLinicasPorEspecialista);
-        this.obtenerConteoPacientes();
-        this.filtrarHistoriasClinicas();
+
+        this.filtrarTurnos();
       });
     })
   }
 
   obtenerConteoPacientes(): void {
     this.pacientesCount = {};
-    for (const historia of this.listaHistoriasCLinicasPorEspecialista) {
+    for (const historia of this.listaTurnosPorEspecialista) {
       const paciente = historia.paciente;
       const fecha = historia.fechaTurno;
 
@@ -62,11 +62,11 @@ export class PacientesComponent {
     return fechas.length > 0 ? fechas.join('<br> ') : 'No hay fechas disponibles';
   }
 
-  filtrarHistoriasClinicas(): void {
+  filtrarTurnos(): void {
     this.listaPacientes = [];
     const pacientesSet = new Set<string>();
-    for (const historia of this.listaHistoriasCLinicasPorEspecialista) {
-      const paciente = historia.paciente;
+    for (const turno of this.listaTurnosPorEspecialista) {
+      const paciente = turno.paciente;
 
       if (!pacientesSet.has(paciente.id)) {
         pacientesSet.add(paciente.id);
@@ -86,11 +86,11 @@ export class PacientesComponent {
   obtenerHistorialPorPaciente(paciente:any)
   {
     this.historialPorPaciente = [];
-    console.log(this.listaHistoriasCLinicasPorEspecialista);
-    for (let i = 0; i < this.listaHistoriasCLinicasPorEspecialista.length; i++) {
-      if(this.listaHistoriasCLinicasPorEspecialista[i].paciente.id == paciente.id)
+    console.log(this.listaTurnosPorEspecialista);
+    for (let i = 0; i < this.listaTurnosPorEspecialista.length; i++) {
+      if(this.listaTurnosPorEspecialista[i].paciente.id == paciente.id)
       {
-        this.historialPorPaciente.push(this.listaHistoriasCLinicasPorEspecialista[i]);
+        this.historialPorPaciente.push(this.listaTurnosPorEspecialista[i]);
       }
     }
     console.log(this.historialPorPaciente);

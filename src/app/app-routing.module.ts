@@ -9,6 +9,7 @@ import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno
 import { TurnosComponent } from './pages/turnos/turnos.component';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
 
 const routes: Routes = [
   {path: "", component: BienvenidaComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: "solicitar-turno", component: SolicitarTurnoComponent},
   {path: "turnos", component: TurnosComponent},
   {path: "mis-turnos", component: MisTurnosComponent},
-  {path: "pacientes", component: PacientesComponent}
+  {path: "pacientes", component: PacientesComponent},
+  {path: "estadisticas", component: EstadisticasComponent}
 ];
 
 @NgModule({
